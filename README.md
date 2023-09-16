@@ -1,4 +1,4 @@
-# Проект movies-explorer-frontend фронтенд
+# Проект movies-explorer-frontend
 
 Репозиторий для приложения проекта `movies-explorer-frontend`, включающий фронтенд приложения.
 
