@@ -1,11 +1,24 @@
 import React from "react";
 import "./Movies.css";
+import MoviesCardList from "./MoviesCardList/MoviesCardList";
+//import Preloader from "./Preloader/Preloader";
+import SearchForm from "./SearchForm/SearchForm";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 
-function Movies () {
+import moviesCards from "../../utils/MoviesCards";
+
+function Movies() {
+
   return (
-    <div>
-    
-    </div>
+    <>
+      <Header />
+      <main className="movies">
+        <SearchForm />
+        <MoviesCardList cards={moviesCards} />
+      </main>
+      <Footer />
+    </>
   );
 }
 

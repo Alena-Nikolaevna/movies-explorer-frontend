@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+//import Header from "../Header/Header";
+//import Footer from "../Footer/Footer";
 import Login from "../Login/Login";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="page">
 
-      <Header />
+    
       <Routes>
 
         <Route path="/" element={<Main />} />
@@ -27,11 +27,10 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />
-
         <Route path="*" element={<PageNotFound />} />
 
       </Routes>
-      <Footer />
+  
     </div>
   );
 }

@@ -3,10 +3,19 @@
     min-height: 74px;
     margin: 0 auto;
     display: flex;
-    background-color: #073042;
     box-sizing: border-box;
     padding: 18px 70px;
     justify-content: space-between;
+    position: relative;
+}
+
+
+.header-white {
+    background-color: #fff;
+}
+
+.header-green {
+    background-color: #073042;
 }
 
 .header__logo {
@@ -24,6 +33,7 @@
     font-size: 12px;
     font-weight: 500;
     line-height: 16px;
+    font-style: normal;
 }
 
 .header__register {
@@ -31,6 +41,10 @@
     margin-right: 30px;
     color: #fff;
     text-decoration: none;
+}
+
+.header__register:hover {
+    opacity: 0.8;
 }
 
 .header__login {
@@ -46,14 +60,18 @@
     align-items: center;
 }
 
+.header__login:hover {
+    opacity: 0.8;
+}
+
 @media screen and (max-width: 768px) {
-    .header {
+    .header-green {
         padding: 18px 30px;
     }
 }
 
 @media screen and (max-width: 460px) {
-    .header {
+    .header-green {
         padding: 18px 14px;
     }
 }
@@ -69,6 +87,42 @@
     }
 
     .header__register {
-        margin-right: 15px;
+        margin-right: 14px;
     }
+}
+
+/*///////////////////////////////////////
+//////////////////////////
+//////////////////////////////////*/
+
+.header__container-authorized {
+
+}
+
+.header__movies {
+    color: #000;
+    text-align: right;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+    text-decoration: none;
+}
+
+.header__saved-movies {
+    text-align: right;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+    text-decoration: none;
+}
+
+.header__profile {
+    color: #000;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 12px;
+    text-decoration: none;
 }

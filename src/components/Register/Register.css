@@ -1,0 +1,26 @@
+.register {
+    max-width: 396px;
+    margin: 70px auto;
+}
+
+/* адаптивность 768px */
+
+@media screen and (max-width: 768px) {
+    .register {
+        margin: 232px auto;
+    }
+}
+
+/* адаптивность 570px */
+
+@media screen and (max-width: 570px) {
+    .register {
+        max-width: 260px;
+        margin: 56px auto 30px;
+    }
+
+    .register__logo {
+        display: flex;
+        justify-content: center;
+    }
+}

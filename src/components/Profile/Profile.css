@@ -1,0 +1,124 @@
+.profile {
+    max-width: 410px;
+    margin: 74px auto 70px;
+}
+
+.profile-heading {
+    margin-top: 0;
+    margin-bottom: 123px;
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.profile__form {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.profile__form-label {
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    color: #000;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.profile__form-label:last-child {
+    border-bottom: none;
+}
+
+.profile__form-input {
+    padding: 0;
+    border: none;
+    color: #000;
+    text-align: right;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background-color: transparent;
+}
+
+.profile__form-button {
+    width: 410px;
+    margin-top: 220px;
+    margin-bottom: 16px;
+    padding: 0;
+    border: 0;
+    text-align: center;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background-color: transparent;
+}
+
+.profile__form-button:hover {
+    opacity: .8;
+}
+
+.profile__link-text {
+    margin: 0;
+    text-align: center;
+}
+
+.profile__link {
+    color: #FF3055;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration: none;
+}
+
+.profile__link:hover {
+    opacity: .7;
+}
+
+/* адаптивность 768px */
+
+@media screen and (max-width: 768px) {
+    .profile {
+        margin: 236px auto 269px;
+    }
+
+    .profile-heading {
+        margin-bottom: 96px;
+    }
+
+    .profile__form-button {
+        margin-top: 210px;
+    }
+}
+
+/* адаптивность 570px */
+
+@media screen and (max-width: 570px) {
+
+    .profile {
+        max-width: 260px;
+        margin: 70px auto 40px;
+    }
+
+    .profile-heading {
+        margin-bottom: 80px;
+    }
+
+    .profile__form-button {
+        width: 260px;
+        margin-top: 379px;
+        font-size: 12px;
+    }
+
+    .profile__link {
+        font-size: 12px;
+    }
+}

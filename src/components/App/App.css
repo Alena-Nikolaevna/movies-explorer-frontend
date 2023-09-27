@@ -14,7 +14,6 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  /*height: 100vh;*/
 }
 
 /*узнать, можно ли оставить прижатым футер, при этом чтобы весь фон остался черным.*/

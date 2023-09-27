@@ -1,0 +1,157 @@
+.searchform {
+    padding: 0 70px;
+}
+
+.searchform__form {
+    padding: 70px 0 48px;
+}
+
+.searchform__container {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 13px;
+}
+
+.searchform__input {
+    padding: 0;
+    border: 0;
+    color: #A0A0A0;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.searchform__submit-btn {
+    width: 58.65px;
+    height: 34px;
+    margin-left: 21.35px;
+    padding: 0;
+    color: #FFF;
+    text-align: center;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+    border: none;
+    border-radius: 48px;
+    background: #3456F3;
+}
+
+.searchform__submit-btn:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.searchform__checkbox-container {
+    margin-top: 33px;
+}
+
+.searchform__label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.searchform__checkbox-item {
+    width: 34px;
+    height: 14px;
+    appearance: none;
+    position: relative;
+    background-color: #C4C4C4;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.searchform__checkbox-item:hover {
+    opacity: 0.8;
+}
+
+.searchform__checkbox-item:checked {
+    background-color: #2BE080;
+}
+
+.searchform__checkbox-item::after {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    background-color: #F5F5F5;
+    border-radius: 50%;
+    content: "";
+}
+
+.searchform__checkbox-item:checked::after {
+    left: 21px;
+    background-color: #FFF;
+}
+
+.searchform__label-text {
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+}
+
+/* адаптивность 768px*/
+
+@media screen and (max-width: 768px) {
+    .searchform {
+        padding: 0 30px;
+    }
+
+    .searchform__form {
+        padding: 80px 0 61px;
+    }
+
+    .searchform__checkbox-container {
+        margin-top: 30px;
+    }
+
+    .searchform__label {
+        gap: 16px;
+        flex-direction: row-reverse;
+    }
+}
+
+/* адаптивность 570px*/
+
+@media screen and (max-width: 570px) {
+    .searchform {
+        padding: 0 14px;
+    }
+
+    .searchform__form {
+        padding: 90px 0 51px;
+    }
+
+    .searchform__container {
+        position: relative;
+        padding-bottom: 15px;
+    }
+
+    .searchform__input {
+        font-size: 18px;
+    }
+
+    .searchform__submit-btn {
+        position: absolute;
+        right: 0;
+        bottom: 9px;
+    }
+
+    .searchform__checkbox-container {
+        margin-top: 41px;
+    }
+
+    .searchform__label {
+        justify-content: center;
+        gap: 13px;
+    }
+
+    .searchform__label-text {
+        font-size: 11px;
+    }
+}

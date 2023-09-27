@@ -1,0 +1,139 @@
+.auth {
+    max-width: 396px;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+
+.auth__form-heading {
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+/*.auth__container {
+    
+}*/
+
+.auth__form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.auth__form-label {
+    display: flex;
+    flex-direction: column;
+    color: #A0A0A0;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.auth__form-input {
+    padding: 5px 0 10px;
+    border: none;
+    border-bottom: 1px solid #E8E8E8;
+    color: #000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background-color: transparent;
+}
+
+.auth__form-error {
+    padding-top: 6px;
+    color: #FF3055;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.button {
+    width: 396px;
+    height: 45px;
+    padding: 0;
+    border: 0;
+    background-color: #3456F3;
+    border-radius: 3px;
+    color: #FFF;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.auth__form-button-login {
+    margin-top: 221px;
+}
+
+.auth__form-button-register {
+    margin-top: 134px;
+}
+
+.button:hover {
+    opacity: .8;
+}
+
+.auth__link-text {
+    margin-top: 16px;
+    margin-bottom: 0;
+    color: #A0A0A0;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.auth__link {
+    margin-left: 6px;
+    color: #3456F3;
+    text-decoration: none;
+}
+
+.auth__link:hover {
+    opacity: .7;
+}
+
+/* адаптивность 570px */
+
+@media screen and (max-width: 570px) {
+    .auth {
+        max-width: 260px;
+        padding-top: 50px;
+    }
+
+    .auth__form-heading {
+        margin-bottom: 80px;
+        text-align: center;
+    }
+
+    .button {
+        width: 260px;
+        font-size: 12px;
+    }
+
+    .auth__form-button-login {
+        margin-top: 267px;
+    }
+
+    .auth__form-button-register {
+        margin-top: 222px;
+    }
+
+    .auth__link-text {
+        margin-top: 14px;
+        font-size: 12px;
+    }
+
+    .auth__link {
+        margin-left: 7px;
+    }
+}
