@@ -2,17 +2,12 @@ import React from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-function Profile(props) {
+function Profile() {
 
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-
-  function handleSubmit(evt) {
-    // Запрещаем браузеру переходить по адресу формы
-    evt.preventDefault();
-    props.handleRegister({ name, email });
-  }
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   function handleChangeName(evt) {
     setName(evt.target.value);
@@ -22,6 +17,12 @@ function Profile(props) {
     setEmail(evt.target.value);
   }
 
+  const [isRedact, setIsRedact] = useState(false);
+
+  function handleSubmitButton() {
+    setIsRedact(!isRedact)
+  }
+
   return (
     <>
 
@@ -29,17 +30,18 @@ function Profile(props) {
       <section className="profile">
 
         <h2 className="profile-heading">Привет, Виталий!</h2>
-        <form className="profile__form" onSubmit={handleSubmit}>
+        <form className="profile__form">
 
           <label className="profile__form-label">Имя
             <input
+              disabled={!isRedact}
               className="profile__form-input"
               type="text"
               placeholder="Виталий"
               name="name"
               minLength="2"
               maxLength="35"
-              value={props.name || ''}
+              value={name || ''}
               onChange={handleChangeName}
               required
             />
@@ -47,11 +49,12 @@ function Profile(props) {
 
           <label className="profile__form-label">Email
             <input
+              disabled={!isRedact}
               className="profile__form-input"
               type="email"
               placeholder="pochta@yandex.ru|"
               name="email"
-              value={props.email || ''}
+              value={email || ''}
               onChange={handleChangeEmail}
               required
             />
@@ -59,9 +62,20 @@ function Profile(props) {
 
         </form>
 
-        <button className="profile__form-button" type="submit">Редактировать</button>
-        <p className="profile__link-text"><Link to="/" className="profile__link">Выйти из аккаунта</Link></p>
+        {isRedact ? (
+          <div className="profile__save">
+            <span className="profile__error">При обновлении профиля произошла ошибка.</span>
+            <button className="profile__button-save" type="submit" onClick={handleSubmitButton}>
+              Сохранить
+            </button>
+          </div>
+        ) : (
 
+          <div>
+            <button className="profile__button-redact" type="submit" onClick={handleSubmitButton}>Редактировать</button>
+            <p className="profile__link-text"><Link to="/" className="profile__link">Выйти из аккаунта</Link></p>
+          </div>
+        )}
       </section>
     </>
   );
