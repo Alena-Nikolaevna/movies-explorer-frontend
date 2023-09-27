@@ -10,7 +10,7 @@ import savedMoviesCards from "../../utils/SavedMoviesCards";
 function SavedMovies() {
   return (
     <>
-      <Header />
+      <Header className="header" />
       <main className="savedmovies">
         <SearchForm />
         <MoviesCardList cards={savedMoviesCards} />

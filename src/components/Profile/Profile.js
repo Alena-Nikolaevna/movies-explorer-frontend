@@ -26,7 +26,7 @@ function Profile() {
   return (
     <>
 
-      <Header />
+      <Header className="header" />
       <section className="profile">
 
         <h2 className="profile-heading">Привет, Виталий!</h2>
@@ -44,6 +44,7 @@ function Profile() {
               value={name || ''}
               onChange={handleChangeName}
               required
+              autocomplete="off"
             />
           </label>
 
@@ -57,6 +58,7 @@ function Profile() {
               value={email || ''}
               onChange={handleChangeEmail}
               required
+              autocomplete="off"
             />
           </label>
 

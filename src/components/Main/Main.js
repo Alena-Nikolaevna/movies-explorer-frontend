@@ -14,7 +14,7 @@ import Header from "../Header/Header";
 function Main() {
   return (
     <>
-    <Header />
+    <Header className="header header-green" />
       <main className="main">
         <Promo />
         <NavTab />

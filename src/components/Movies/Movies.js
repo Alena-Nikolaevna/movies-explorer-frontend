@@ -12,7 +12,7 @@ function Movies() {
 
   return (
     <>
-      <Header />
+      <Header className="header" />
       <main className="movies">
         <SearchForm />
         <MoviesCardList cards={moviesCards} />
