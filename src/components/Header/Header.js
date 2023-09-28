@@ -7,7 +7,7 @@ import Navigation from "../Navigation/Navigation";
 
 function Header(props) {
 
-    // const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn] = useState(false);
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -23,13 +23,44 @@ function Header(props) {
                 <div className="header__logo"></div>
             </Link>
 
-            {
-                pathname === "/" &&
-                <div className="header__container">
-                    <Link to="/signup" className="header__register">Регистрация</Link>
-                    <Link to="/signin" className="header__login">Войти</Link>
-                </div>
-            }
+            {!isLoggedIn ? (
+                <>
+                    {
+                        pathname === "/" &&
+                        <div className="header__container">
+                            <Link to="/signup" className="header__register">Регистрация</Link>
+                            <Link to="/signin" className="header__login">Войти</Link>
+                        </div>
+                    }
+                </>
+            ) : (
+
+                <>
+                    {
+                        pathname === "/" &&
+                        <>
+                            <nav className="header__container-authorized">
+                                <Link to="/movies" className="header__movies header__authorized_green">Фильмы</Link>
+                                <Link to="/saved-movies" className="header__saved-movies header__authorized_green">Сохранённые фильмы</Link>
+                            </nav>
+
+                            <Link className="header__account header__account_green" to="/profile">
+                                <p className="header__account-text">Аккаунт
+                                    <div className="header__account-icon"></div>
+                                </p>
+                            </Link>
+
+                            <button className="header__button-open header__button-open_white" type="button" onClick={handleBurgerOpen} />
+
+                            {isMenuOpen ? (
+                                <Navigation />
+                            ) : (
+                                ""
+                            )}
+                        </>
+                    }
+                </>
+            )}
 
             {
                 pathname === "/movies" ||
@@ -51,7 +82,7 @@ function Header(props) {
                             <button className="header__button-open" type="button" onClick={handleBurgerOpen} />
 
                             {isMenuOpen ? (
-                            <Navigation />
+                                <Navigation />
                             ) : (
                                 ""
                             )}

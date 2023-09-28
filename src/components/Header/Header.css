@@ -176,6 +176,18 @@
     opacity: 0.8;
 }
 
+.header__authorized_green {
+    color: #fff;
+}
+
+.header__account_green {
+    background-color: #2BE080;
+}
+
+.header__button-open_white {
+    background-image: url("../../images/nav-open-menu-white.svg");
+}
+
 /*Адаптивность 768px, бургер-меню */
 
 @media screen and (max-width: 768px) {
