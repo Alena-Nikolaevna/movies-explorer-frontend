@@ -2,11 +2,18 @@ import React from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-// import { useState } from "react";
+import { useState } from "react";
+import Navigation from "../Navigation/Navigation";
 
 function Header(props) {
 
     // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    function handleBurgerOpen() {
+        setIsMenuOpen(!isMenuOpen)
+    }
 
     const { pathname } = useLocation();
 
@@ -40,6 +47,14 @@ function Header(props) {
                                     <div className="header__account-icon"></div>
                                 </p>
                             </Link>
+
+                            <button className="header__button-open" type="button" onClick={handleBurgerOpen} />
+
+                            {isMenuOpen ? (
+                            <Navigation />
+                            ) : (
+                                ""
+                            )}
                         </>
                     ) : (
                         ""

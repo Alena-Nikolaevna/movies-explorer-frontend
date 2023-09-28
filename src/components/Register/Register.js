@@ -9,10 +9,14 @@ function Register(props) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  function handleSubmit(evt) {
+  // const [isValue, setIsValue] = useState(false);
+
+  function handleRegisterSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
-    props.handleRegister({ name, email, password });
+    setName(!name);
+    setEmail(!email);
+    setPassword(!password);
   }
 
   function handleChangeName(evt) {
@@ -38,7 +42,7 @@ function Register(props) {
 
       <AuthForm
         title={"Добро пожаловать!"}
-        handleSubmit={handleSubmit}
+        handleSubmit={handleRegisterSubmit}
         button={"Зарегистрироваться"}
         classNameBtn={"auth__form-button-register button"}
         text={"Уже зарегистрированы?"}

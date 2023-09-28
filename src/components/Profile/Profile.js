@@ -9,18 +9,18 @@ function Profile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
+  const [isRedact, setIsRedact] = useState(false);
+
+  function handleSubmitButton() {
+    setIsRedact(!isRedact);
+  }
+
   function handleChangeName(evt) {
     setName(evt.target.value);
   }
 
   function handleChangeEmail(evt) {
     setEmail(evt.target.value);
-  }
-
-  const [isRedact, setIsRedact] = useState(false);
-
-  function handleSubmitButton() {
-    setIsRedact(!isRedact)
   }
 
   return (

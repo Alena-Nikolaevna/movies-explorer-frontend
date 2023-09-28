@@ -1,36 +1,44 @@
 import React from "react";
 import "./Navigation.css";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-function Navigation(props) {
 
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+function Navigation() {
 
-    function handleBurgerOpen() {
-        setIsMenuOpen(!isMenuOpen)
+    const [isMenuClose, setIsMenuClose] = useState(false);
+
+    function handleBurgerClose() {
+        setIsMenuClose(!isMenuClose);
     }
 
     return (
+        <>
+            {!isMenuClose ? (
+                <section className="navigation">
 
-        <nav className={`navigation ${props.isOpen ? "navigation_opened" : ""}`}>
+                    <div className="navigation__overlay" />
+                    <nav className="navigation__nav-link">
+                        <div className="navigation__container">
+                            <Link className="navigation__heading" to="/">Главная</Link>
+                            <Link className="navigation__heading" to="/movies">Фильмы</Link>
+                            <Link className="navigation__heading" to="/saved-movies">Сохранённые фильмы</Link>
+                        </div>
 
-            <button className="navigation__button-open" type="button" onClick={handleBurgerOpen} />
+                        <Link className="navigation__account" to="/profile">
+                            <p className="navigation__account-text">Аккаунт
+                                <div className="navigation__account-icon"></div>
+                            </p>
+                        </Link>
 
-            <div className="navigation__container">
-                <Link className='navigation__heading'>Главная</Link>
-                <Link className='navigation__heading'>Фильмы</Link>
-                <Link className="navigation__heading">Сохранённые фильмы</Link>
-            </div>
+                        <button className="navigation__button-close" type="button" onClick={handleBurgerClose} />
 
-            <Link className="navigation__account">
-                <p className="navigation__account-text">Аккаунт
-                    <span className="navigation__account-icon"></span>
-                </p>
-            </Link>
-
-            <button className="navigation__button-close" type="button" />
-
-        </nav>
+                    </nav>
+                </section>
+            ) : (
+                ""
+            )}
+        </>
     );
 }
 

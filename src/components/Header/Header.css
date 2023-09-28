@@ -60,13 +60,13 @@
 }
 
 @media screen and (max-width: 768px) {
-    .header-green {
+    .header {
         padding: 18px 30px;
     }
 }
 
 @media screen and (max-width: 460px) {
-    .header-green {
+    .header {
         padding: 18px 14px;
     }
 }
@@ -104,7 +104,7 @@
 }
 
 .header__movies:hover {
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .header__saved-movies {
@@ -119,7 +119,7 @@
 }
 
 .header__saved-movies:hover {
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .header__account {
@@ -136,7 +136,7 @@
 }
 
 .header__account:hover {
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .header__account-text {
@@ -156,4 +156,57 @@
     border-radius: 50%;
     background-color: #f9f9f9;
     background-position: center;
+}
+
+.header__button-open {
+    visibility: hidden;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    position: absolute;
+    background-image: url("../../images/nav-open-menu.svg");
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    top: 15px;
+    right: 30px;
+}
+
+.header__button-open:hover {
+    opacity: 0.8;
+}
+
+/*Адаптивность 768px, бургер-меню */
+
+@media screen and (max-width: 768px) {
+
+    .header__container-authorized {
+        visibility: hidden;
+    }
+
+    .header__account {
+        visibility: hidden;
+    }
+
+    .header__account-text {
+        visibility: hidden;
+    }
+
+    .header__account-icon {
+        visibility: hidden;
+    }
+
+    .header__button-open {
+        visibility: visible;
+    }
+}
+
+/*Адаптивность 460px, бургер-меню */
+
+@media screen and (max-width: 460px) {
+    .header__button-open {
+        width: 40px;
+        height: 43px;
+        right: 14px;
+    }
 }

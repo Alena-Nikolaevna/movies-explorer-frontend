@@ -13,6 +13,7 @@ import Register from "../Register/Register";
 import SavedMovies from "../SavedMovies/SavedMovies";
 
 import { Routes, Route } from "react-router-dom";
+import Navigation from '../Navigation/Navigation';
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />
         <Route path="*" element={<PageNotFound />} />
+
+        <Route path="/nav" element={<Navigation />} />
 
       </Routes>
   
