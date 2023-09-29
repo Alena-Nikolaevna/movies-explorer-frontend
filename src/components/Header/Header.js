@@ -7,8 +7,7 @@ import Navigation from "../Navigation/Navigation";
 
 function Header(props) {
 
-    const [isLoggedIn] = useState(false); // временно(иначе при запуске предупреждение), а далее =>
-    // const [isLoggedIn, setIsLoggedIn] = useState(false); // потом будет эта константа
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
