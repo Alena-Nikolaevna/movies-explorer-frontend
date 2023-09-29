@@ -1,5 +1,5 @@
 import React from 'react';
-import './MoviesCardList.css';
+import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { useLocation } from "react-router-dom";
 
@@ -7,6 +7,7 @@ function MoviesCardList(props) {
     const { pathname } = useLocation();
 
     return (
+
         <section className="moviescardlist">
 
             <ul className="moviescardlist__cards">

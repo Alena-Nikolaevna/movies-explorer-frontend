@@ -22,7 +22,6 @@
     max-width: 600px;
 }
 
-
 .aboutme__name {
     margin: 0;
     font-size: 50px;
@@ -71,7 +70,7 @@
     object-fit: cover;
 }
 
-/* адаптивность 950px*/
+/* адаптивность 950px */
 
 @media screen and (max-width: 950px) {
     .aboutme__foto {
@@ -79,7 +78,7 @@
     }
 }
 
-/* адаптивность 800px*/
+/* адаптивность 800px */
 
 @media screen and (max-width: 800px) {
     .aboutme__foto {
@@ -87,7 +86,7 @@
     }
 }
 
-/* адаптивность 768px*/
+/* адаптивность 768px */
 
 @media screen and (max-width: 768px) {
     .aboutme {
@@ -121,7 +120,7 @@
     }
 }
 
-/* адаптивность 570px*/
+/* адаптивность 570px */
 
 @media screen and (max-width: 570px) {
     .aboutme {

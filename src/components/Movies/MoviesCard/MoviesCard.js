@@ -1,6 +1,5 @@
-import React from 'react';
-import './MoviesCard.css';
-// import cardfoto from "../../../images/card-foto.svg";
+import React from "react";
+import "./MoviesCard.css";
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -19,6 +18,7 @@ function MoviesCard(props) {
     }
 
     return (
+
         <article className="moviesсard">
 
             <img className="moviesсard__image" src={props.image} alt={props.description} />

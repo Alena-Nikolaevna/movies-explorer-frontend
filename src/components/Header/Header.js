@@ -7,17 +7,19 @@ import Navigation from "../Navigation/Navigation";
 
 function Header(props) {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn] = useState(false); // временно(иначе при запуске предупреждение), а далее =>
+    // const [isLoggedIn, setIsLoggedIn] = useState(false); // потом будет эта константа
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const { pathname } = useLocation();
 
     function handleBurgerOpen() {
         setIsMenuOpen(!isMenuOpen)
     }
 
-    const { pathname } = useLocation();
-
     return (
+
         <header className={props.className}>
             <Link to="/">
                 <div className="header__logo"></div>
@@ -60,37 +62,39 @@ function Header(props) {
                         </>
                     }
 
-                    {
-                        pathname === "/movies" ||
-                            pathname === "/saved-movies" ||
-                            pathname === "/profile" ?
-                            (
-                                <>
-                                    <nav className="header__container-authorized">
-                                        <Link to="/movies" className="header__movies">Фильмы</Link>
-                                        <Link to="/saved-movies" className="header__saved-movies">Сохранённые фильмы</Link>
-                                    </nav>
-
-                                    <Link className="header__account" to="/profile">
-                                        <p className="header__account-text">Аккаунт
-                                            <div className="header__account-icon"></div>
-                                        </p>
-                                    </Link>
-
-                                    <button className="header__button-open" type="button" onClick={handleBurgerOpen} />
-
-                                    {isMenuOpen ? (
-                                        <Navigation />
-                                    ) : (
-                                        ""
-                                    )}
-                                </>
-                            ) : (
-                                ""
-                            )
-                    }
                 </>
             )}
+
+            {
+                pathname === "/movies" ||
+                    pathname === "/saved-movies" ||
+                    pathname === "/profile" ?
+                    (
+                        <>
+                            <nav className="header__container-authorized">
+                                <Link to="/movies" className="header__movies">Фильмы</Link>
+                                <Link to="/saved-movies" className="header__saved-movies">Сохранённые фильмы</Link>
+                            </nav>
+
+                            <Link className="header__account" to="/profile">
+                                <p className="header__account-text">Аккаунт
+                                    <div className="header__account-icon"></div>
+                                </p>
+                            </Link>
+
+                            <button className="header__button-open" type="button" onClick={handleBurgerOpen} />
+
+                            {isMenuOpen ? (
+                                <Navigation />
+                            ) : (
+                                ""
+                            )}
+                        </>
+                    ) : (
+                        ""
+                    )
+            }
+
         </header >
     );
 }

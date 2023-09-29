@@ -4,6 +4,7 @@ import aboutmefoto from "../../../images/foto-student_pic.svg";
 
 function AboutMe() {
   return (
+
     <section className="aboutme">
       <h2 className="aboutme__title">Студент</h2>
 

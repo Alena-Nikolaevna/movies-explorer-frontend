@@ -59,17 +59,23 @@
     opacity: 0.8;
 }
 
+/* адаптивность 768px */
+
 @media screen and (max-width: 768px) {
     .header {
         padding: 18px 30px;
     }
 }
 
+/* адаптивность 460px */
+
 @media screen and (max-width: 460px) {
     .header {
         padding: 18px 14px;
     }
 }
+
+/* адаптивность 320px */
 
 @media screen and (max-width: 320px) {
     .header__container {
@@ -86,7 +92,7 @@
     }
 }
 
-/*///////////////////////////////////////*/
+/* авторизованный пользователь */
 
 .header__container-authorized {
     display: flex;
@@ -188,7 +194,7 @@
     background-image: url("../../images/nav-open-menu-white.svg");
 }
 
-/*Адаптивность 768px, бургер-меню */
+/* адаптивность 768px, бургер-меню */
 
 @media screen and (max-width: 768px) {
 
@@ -213,7 +219,7 @@
     }
 }
 
-/*Адаптивность 460px, бургер-меню */
+/* адаптивность 460px, бургер-меню */
 
 @media screen and (max-width: 460px) {
     .header__button-open {

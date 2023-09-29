@@ -94,7 +94,7 @@
     line-height: 17px;
 }
 
-/* адаптивность 768px*/
+/* адаптивность 768px */
 
 @media screen and (max-width: 768px) {
     .aboutproject {
@@ -134,7 +134,7 @@
     }
 }
 
-/* адаптивность 570px*/
+/* адаптивность 570px */
 
 @media screen and (max-width: 570px) {
     .aboutproject {

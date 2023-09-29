@@ -13,10 +13,6 @@
     line-height: normal;
 }
 
-/*.auth__container {
-    
-}*/
-
 .auth__form {
     display: flex;
     flex-direction: column;

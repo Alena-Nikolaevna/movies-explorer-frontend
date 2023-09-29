@@ -6,8 +6,8 @@ function AuthForm(props) {
 
     return (
         <section className="auth">
-
             <h2 className="auth__form-heading">{props.title}</h2>
+
             <div className="auth__container">
 
                 <form className="auth__form" name={props.name} onSubmit={props.handleSubmit}>

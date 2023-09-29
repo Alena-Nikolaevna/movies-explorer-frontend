@@ -3,7 +3,7 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import AuthForm from "../AuthForm/AuthForm";
 
-function Login() {
+function Login(props) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 

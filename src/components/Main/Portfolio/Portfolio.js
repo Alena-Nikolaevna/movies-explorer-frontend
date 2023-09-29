@@ -4,6 +4,7 @@ import portfoliostrelka from "../../../images/portfolio-strelka.svg";
 
 function Portfolio() {
   return (
+
     <section className="portfolio">
       <h2 className="portfolio__title">Портфолио</h2>
 
@@ -17,13 +18,13 @@ function Portfolio() {
 
         <li className="portfolio__text">
           <a className="portfolio__link" href="https://alena-nikolaevna.github.io/russian-travel" target="_blank" rel="noreferrer">Адаптивный сайт
-          <img className="portfolio__strelka" src={portfoliostrelka} alt="Указатель стрелки"></img>
+            <img className="portfolio__strelka" src={portfoliostrelka} alt="Указатель стрелки"></img>
           </a>
         </li>
 
         <li className="portfolio__text">
           <a className="portfolio__link" href="https://alena-nikolaevna.github.io/mesto" target="_blank" rel="noreferrer">Одностраничное приложение
-          <img className="portfolio__strelka" src={portfoliostrelka} alt="Указатель стрелки"></img>
+            <img className="portfolio__strelka" src={portfoliostrelka} alt="Указатель стрелки"></img>
           </a>
         </li>
 

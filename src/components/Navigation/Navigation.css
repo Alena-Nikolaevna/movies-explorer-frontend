@@ -47,7 +47,7 @@
     width: 22px;
     height: 22px;
     padding: 0;
-    /* transform: rotate(-45deg);*/
+    /* transform: rotate(-45deg); */
     background-image: url("../../images/nav-close-menu.svg");
     background-position: center;
     border: 0;
@@ -57,7 +57,7 @@
     right: 22.44px;
 }
 
-/*Кнопка Аккаунт*/
+/* кнопка "аккаунт" */
 
 .navigation__account {
     display: flex;
@@ -96,14 +96,13 @@
     background-position: center;
 }
 
-/*Адаптивность 460px, бургер-меню */
+/* адаптивность 570px, бургер-меню */
 
 @media screen and (max-width: 570px) {
 
     .navigation__overlay {
         height: 780px;
     }
-    
 
     .navigation__nav-link {
         width: 320px;

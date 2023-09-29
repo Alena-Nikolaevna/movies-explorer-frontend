@@ -3,7 +3,6 @@ import "./Navigation.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-
 function Navigation() {
 
     const [isMenuClose, setIsMenuClose] = useState(false);

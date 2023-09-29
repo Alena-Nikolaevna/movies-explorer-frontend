@@ -3,6 +3,7 @@ import './SearchForm.css';
 
 function SearchForm() {
     return (
+
         <section className="searchform">
 
             <form className="searchform__form">

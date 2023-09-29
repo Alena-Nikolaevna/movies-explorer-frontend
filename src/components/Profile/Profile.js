@@ -26,6 +26,7 @@ function Profile() {
   return (
     <>
       <Header className="header" />
+
       <section className="profile">
 
         <h2 className="profile-heading">Привет, Виталий!</h2>
@@ -43,7 +44,6 @@ function Profile() {
               value={name || ''}
               onChange={handleChangeName}
               required
-              autocomplete="off"
             />
           </label>
 
@@ -57,7 +57,6 @@ function Profile() {
               value={email || ''}
               onChange={handleChangeEmail}
               required
-              autocomplete="off"
             />
           </label>
 
@@ -66,9 +65,7 @@ function Profile() {
         {isRedact ? (
           <div className="profile__save">
             <span className="profile__error">При обновлении профиля произошла ошибка.</span>
-            <button className="profile__button-save" type="submit" onClick={handleSubmitButton}>
-              Сохранить
-            </button>
+            <button className="profile__button-save" type="submit" onClick={handleSubmitButton}>Сохранить</button>
           </div>
         ) : (
 
@@ -76,6 +73,7 @@ function Profile() {
             <button className="profile__button-redact" type="submit" onClick={handleSubmitButton}>Редактировать</button>
             <p className="profile__link-text"><Link to="/" className="profile__link">Выйти из аккаунта</Link></p>
           </div>
+
         )}
       </section>
     </>

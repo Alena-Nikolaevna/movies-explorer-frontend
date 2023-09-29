@@ -38,7 +38,7 @@
     opacity: 0.8;
 }
 
-/* адаптивность 768px*/
+/* адаптивность 768px */
 
 @media screen and (max-width: 768px) {
     .moviescardlist {
@@ -50,7 +50,7 @@
     }
 }
 
-/* адаптивность 570px*/
+/* адаптивность 570px */
 
 @media screen and (max-width: 570px) {
     .moviescardlist {

@@ -13,10 +13,12 @@ function Movies() {
   return (
     <>
       <Header className="header" />
+
       <main className="movies">
         <SearchForm />
         <MoviesCardList cards={moviesCards} />
       </main>
+
       <Footer />
     </>
   );

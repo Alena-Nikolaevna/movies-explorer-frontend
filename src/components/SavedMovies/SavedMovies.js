@@ -11,10 +11,12 @@ function SavedMovies() {
   return (
     <>
       <Header className="header" />
+
       <main className="savedmovies">
         <SearchForm />
         <MoviesCardList cards={savedMoviesCards} />
       </main>
+
       <Footer />
     </>
   );
