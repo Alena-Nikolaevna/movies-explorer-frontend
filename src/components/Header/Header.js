@@ -7,7 +7,7 @@ import Navigation from "../Navigation/Navigation";
 
 function Header(props) {
 
-    const [isLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -59,38 +59,38 @@ function Header(props) {
                             )}
                         </>
                     }
-                </>
-            )}
 
-            {
-                pathname === "/movies" ||
-                    pathname === "/saved-movies" ||
-                    pathname === "/profile" ?
-                    (
-                        <>
-                            <nav className="header__container-authorized">
-                                <Link to="/movies" className="header__movies">Фильмы</Link>
-                                <Link to="/saved-movies" className="header__saved-movies">Сохранённые фильмы</Link>
-                            </nav>
+                    {
+                        pathname === "/movies" ||
+                            pathname === "/saved-movies" ||
+                            pathname === "/profile" ?
+                            (
+                                <>
+                                    <nav className="header__container-authorized">
+                                        <Link to="/movies" className="header__movies">Фильмы</Link>
+                                        <Link to="/saved-movies" className="header__saved-movies">Сохранённые фильмы</Link>
+                                    </nav>
 
-                            <Link className="header__account" to="/profile">
-                                <p className="header__account-text">Аккаунт
-                                    <div className="header__account-icon"></div>
-                                </p>
-                            </Link>
+                                    <Link className="header__account" to="/profile">
+                                        <p className="header__account-text">Аккаунт
+                                            <div className="header__account-icon"></div>
+                                        </p>
+                                    </Link>
 
-                            <button className="header__button-open" type="button" onClick={handleBurgerOpen} />
+                                    <button className="header__button-open" type="button" onClick={handleBurgerOpen} />
 
-                            {isMenuOpen ? (
-                                <Navigation />
+                                    {isMenuOpen ? (
+                                        <Navigation />
+                                    ) : (
+                                        ""
+                                    )}
+                                </>
                             ) : (
                                 ""
-                            )}
-                        </>
-                    ) : (
-                        ""
-                    )
-            }
+                            )
+                    }
+                </>
+            )}
         </header >
     );
 }

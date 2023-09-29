@@ -31,32 +31,6 @@
     opacity: 0.5;
 }
 
-.promo__button {
-    width: 129px;
-    height: 36px;
-    margin-top: 146px;
-    padding: 0;
-    border-radius: 3px;
-    border: 1px solid #FFF;
-    background-color: #073042;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.promo__button:hover {
-    opacity: 0.6;
-}
-
-.promo__link {
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
-    color: #fff;
-    text-decoration: none;
-}
-
 .promo__illustration {
     width: 310px;
     height: 304px;
@@ -93,10 +67,6 @@
         text-align: center;
     }
 
-    .promo__button {
-        margin: 92px auto 0;
-    }
-
     .promo__illustration {
         top: 0;
         right: 0;
@@ -123,10 +93,6 @@
         font-size: 30px;
         line-height: 38px;
         letter-spacing: -1.2px;
-    }
-
-    .promo__button {
-        margin: 80px auto -36px;
     }
 
     .promo__illustration {

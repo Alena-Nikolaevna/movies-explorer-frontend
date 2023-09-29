@@ -25,7 +25,6 @@ function Profile() {
 
   return (
     <>
-
       <Header className="header" />
       <section className="profile">
 

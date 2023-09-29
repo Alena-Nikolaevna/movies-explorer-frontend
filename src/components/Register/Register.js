@@ -3,7 +3,7 @@ import "./Register.css";
 import { Link } from "react-router-dom";
 import AuthForm from "../AuthForm/AuthForm";
 
-function Register(props) {
+function Register() {
 
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -58,7 +58,7 @@ function Register(props) {
             name="name"
             minLength="2"
             maxLength="35"
-            // value={props.email || ''}
+            value={name || ''}
             onChange={handleChangeName}
             required
           />
@@ -70,7 +70,7 @@ function Register(props) {
             type="email"
             placeholder="pochta@yandex.ru|"
             name="email"
-            // value={props.email || ''}
+            value={email || ''}
             onChange={handleChangeEmail}
             required
           />
@@ -84,7 +84,7 @@ function Register(props) {
             name="password"
             minLength="6"
             maxLength="16"
-            // value={props.password || ''}
+            value={password || ''}
             onChange={handleChangePassword}
             required
           />
@@ -92,7 +92,6 @@ function Register(props) {
         </label>
 
       </AuthForm>
-
 
     </section>
   );

@@ -3,14 +3,15 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import AuthForm from "../AuthForm/AuthForm";
 
-function Login(props) {
+function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  function handleSubmit(evt) {
+  function handleLoginSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
-    props.handleRegister({ email, password });
+    setEmail(!email);
+    setPassword(!password);
   }
 
   function handleChangeEmail(evt) {
@@ -32,7 +33,7 @@ function Login(props) {
 
       <AuthForm
         title={"Рады видеть!"}
-        handleSubmit={handleSubmit}
+        handleSubmit={handleLoginSubmit}
         button={"Войти"}
         classNameBtn={"auth__form-button-login button"}
         text={"Ещё не зарегистрированы?"}
@@ -46,7 +47,7 @@ function Login(props) {
             type="email"
             placeholder="pochta@yandex.ru|"
             name="email"
-            // value={props.email || ''}
+            value={email || ''}
             onChange={handleChangeEmail}
             required
           />
@@ -59,15 +60,13 @@ function Login(props) {
             name="password"
             minLength="6"
             maxLength="16"
-            // value={props.password || ''}
+            value={password || ''}
             onChange={handleChangePassword}
             required
           />
         </label>
 
-
       </AuthForm>
-
 
     </section>
   );
