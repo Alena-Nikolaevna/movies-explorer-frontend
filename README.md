@@ -1,3 +1,27 @@
+# Проект movies-explorer-frontend
+
+Репозиторий для приложения проекта `movies-explorer-frontend`, включающий фронтенд приложения.
+
+Адрес репозитория:
+https://github.com/Alena-Nikolaevna/movies-explorer-frontend.git
+_____________________________________________________________________________
+
+## Макет
+
+Проект выполнен по макету из фигмы "light-1"
+________________________________________________________________________________
+
+## Ссылки на проект
+
+IP 158.160.98.59
+
+Frontend https://movies-ank.nomoreparties.co
+
+Backend https://api.movies-ank.nomoreparties.co
+
+_________________________________________________________________________________
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
