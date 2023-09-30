@@ -3,6 +3,19 @@
     margin: 70px auto;
 }
 
+.register__header-logo {
+    width: 38px;
+    height: 38px;
+    margin: 0;
+    background-image: url(../../images/logo.svg);
+    background-repeat: no-repeat;
+}
+
+.register__header-logo:hover {
+    opacity: 0.8;
+}
+
+
 /* адаптивность 768px */
 
 @media screen and (max-width: 768px) {

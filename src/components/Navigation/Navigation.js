@@ -2,6 +2,7 @@ import React from "react";
 import "./Navigation.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 function Navigation() {
 
@@ -19,9 +20,9 @@ function Navigation() {
                     <div className="navigation__overlay" />
                     <nav className="navigation__nav-link">
                         <div className="navigation__container">
-                            <Link className="navigation__heading" to="/">Главная</Link>
-                            <Link className="navigation__heading" to="/movies">Фильмы</Link>
-                            <Link className="navigation__heading" to="/saved-movies">Сохранённые фильмы</Link>
+                            <NavLink className={({ isActive }) => `navigation__heading ${isActive ? 'navigation__heading_active' : ""}`} to="/">Главная</NavLink>
+                            <NavLink className={({ isActive }) => `navigation__heading ${isActive ? 'navigation__heading_active' : ""}`} to="/movies">Фильмы</NavLink>
+                            <NavLink className={({ isActive }) => `navigation__heading ${isActive ? 'navigation__heading_active' : ""}`} to="/saved-movies">Сохранённые фильмы</NavLink>
                         </div>
 
                         <Link className="navigation__account" to="/profile">

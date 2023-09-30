@@ -50,7 +50,7 @@
     line-height: normal;
 }
 
-.button {
+.auth__button {
     width: 396px;
     height: 45px;
     padding: 0;
@@ -63,6 +63,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    cursor: pointer;
 }
 
 .auth__form-button-login {
@@ -73,7 +74,7 @@
     margin-top: 134px;
 }
 
-.button:hover {
+.auth__button:hover {
     opacity: .8;
 }
 
@@ -111,7 +112,7 @@
         text-align: center;
     }
 
-    .button {
+    .auth__button {
         width: 260px;
         font-size: 12px;
     }

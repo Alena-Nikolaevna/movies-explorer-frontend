@@ -18,13 +18,14 @@
 }
 
 .moviesсard__title {
-    margin: 14px 0 29px;
+    max-width: 226px;
+    min-height: 32px;
+    margin: 14px 0 13px;
     font-size: 13px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     text-overflow: ellipsis;
-    white-space: nowrap;
     overflow: hidden;
 }
 
@@ -41,19 +42,19 @@
     right: 0;
 }
 
-.moviesсard__like-btn:hover {
+.moviesсard__btn:hover {
     opacity: 0.8;
 }
 
-.moviesсard__like-btn_active {
+.moviesсard__btn_type_like-active {
     background-image: url(../../../images/card-like-active.svg);
 }
 
-.moviesсard__like-btn_no {
+.moviesсard__btn_type_like-disable {
     background-image: url(../../../images/card-like-no.svg);
 }
 
-.moviesсard__delete-btn {
+.moviesсard__btn_type_delete {
     background-image: url(../../../images/card-delete.svg);
 }
 

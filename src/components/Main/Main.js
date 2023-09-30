@@ -13,7 +13,7 @@ import Header from "../Header/Header";
 function Main() {
   return (
     <>
-      <Header className="header header-green" />
+      <Header className="header header_green" />
 
       <main className="main">
         <Promo />

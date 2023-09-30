@@ -10,7 +10,7 @@ function MoviesCard(props) {
 
     // Создаём переменную, которую после зададим в `className` для кнопки лайка
     const cardLikeButtonClassName = (
-        `moviesсard__btn ${isLiked ? "moviesсard__like-btn_active" : "moviesсard__like-btn_no"}`
+        `moviesсard__btn ${isLiked ? "moviesсard__btn_type_like-active" : "moviesсard__btn_type_like-disable"}`
     );
 
     function handleLikeClick() {
@@ -31,7 +31,7 @@ function MoviesCard(props) {
                 }
 
                 {pathname === "/saved-movies" &&
-                    <button className="moviesсard__btn moviesсard__delete-btn" type="button" aria-label="Удалить фильм"></button>
+                    <button className="moviesсard__btn moviesсard__btn_type_delete" type="button" aria-label="Удалить фильм"></button>
                 }
             </div>
 

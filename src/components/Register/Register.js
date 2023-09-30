@@ -36,7 +36,7 @@ function Register() {
 
       <div className="register__logo">
         <Link to="/">
-          <div className="header__logo"></div>
+          <div className="register__header-logo"></div>
         </Link>
       </div>
 
@@ -44,7 +44,7 @@ function Register() {
         title={"Добро пожаловать!"}
         handleSubmit={handleRegisterSubmit}
         button={"Зарегистрироваться"}
-        classNameBtn={"auth__form-button-register button"}
+        classNameBtn={"auth__form-button-register auth__button"}
         text={"Уже зарегистрированы?"}
         link={"Войти"}
         links={"/signin"}
@@ -57,10 +57,11 @@ function Register() {
             placeholder="Виталий"
             name="name"
             minLength="2"
-            maxLength="35"
+            maxLength="30"
             value={name || ''}
             onChange={handleChangeName}
             required
+            id="name"
           />
         </label>
 
@@ -73,6 +74,7 @@ function Register() {
             value={email || ''}
             onChange={handleChangeEmail}
             required
+            id="email"
           />
         </label>
 
@@ -83,10 +85,10 @@ function Register() {
             placeholder="••••••••••••••"
             name="password"
             minLength="6"
-            maxLength="16"
             value={password || ''}
             onChange={handleChangePassword}
             required
+            id="password"
           />
           <span className="auth__form-error">Что-то пошло не так...</span>
         </label>

@@ -29,7 +29,7 @@ function Profile() {
 
       <section className="profile">
 
-        <h2 className="profile-heading">Привет, Виталий!</h2>
+        <h2 className="profile__heading">Привет, Виталий!</h2>
         <form className="profile__form">
 
           <label className="profile__form-label">Имя
@@ -40,10 +40,11 @@ function Profile() {
               placeholder="Виталий"
               name="name"
               minLength="2"
-              maxLength="35"
+              maxLength="30"
               value={name || ''}
               onChange={handleChangeName}
               required
+              id="name"
             />
           </label>
 
@@ -57,6 +58,7 @@ function Profile() {
               value={email || ''}
               onChange={handleChangeEmail}
               required
+              id="email"
             />
           </label>
 

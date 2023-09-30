@@ -20,8 +20,8 @@ function MoviesCardList(props) {
                     />))}
             </ul>
 
-            <div className="movies__btn-container">
-                {pathname === "/movies" && <button className="movies__btn" type="button">Ещё</button>}
+            <div className="moviescardlist__btn-container">
+                {pathname === "/movies" && <button className="moviescardlist__btn" type="button">Ещё</button>}
             </div>
         </section>
     );

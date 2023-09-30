@@ -8,17 +8,16 @@
     margin: 0 auto;
     display: flex;
     gap: 38px 20px;
-    justify-content: center;
     flex-wrap: wrap;
     list-style: none;
     box-sizing: border-box;
 }
 
-.movies__btn-container {
+.moviescardlist__btn-container {
     display: flex;
 }
 
-.movies__btn {
+.moviescardlist__btn {
     width: 320px;
     height: 36px;
     padding: 0;
@@ -34,7 +33,7 @@
     cursor: pointer;
 }
 
-.movies__btn:hover {
+.moviescardlist__btn:hover {
     opacity: 0.8;
 }
 
@@ -59,5 +58,10 @@
 
     .moviescardlist__cards {
         gap: 34px;
+        justify-content: center;
+    }
+
+    .moviescardlist__btn {
+        width: 240px;
     }
 }

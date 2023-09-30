@@ -9,7 +9,7 @@
     position: relative;
 }
 
-.header-green {
+.header_green {
     background-color: #073042;
 }
 
@@ -19,6 +19,10 @@
     margin: 0;
     background-image: url(../../images/logo.svg);
     background-repeat: no-repeat;
+}
+
+.header__logo:hover {
+    opacity: 0.8;
 }
 
 .header__container {
@@ -182,7 +186,11 @@
     opacity: 0.8;
 }
 
-.header__authorized_green {
+.header__movies_green {
+    color: #fff;
+}
+
+.header__saved-movies_green {
     color: #fff;
 }
 

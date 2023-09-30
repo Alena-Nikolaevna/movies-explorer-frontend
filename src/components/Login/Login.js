@@ -27,7 +27,7 @@ function Login(props) {
 
       <div className="login__logo">
         <Link to="/">
-          <div className="header__logo"></div>
+          <div className="login__header-logo"></div>
         </Link>
       </div>
 
@@ -35,7 +35,7 @@ function Login(props) {
         title={"Рады видеть!"}
         handleSubmit={handleLoginSubmit}
         button={"Войти"}
-        classNameBtn={"auth__form-button-login button"}
+        classNameBtn={"auth__form-button-login auth__button"}
         text={"Ещё не зарегистрированы?"}
         link={"Регистрация"}
         links={"/signup"}
@@ -50,6 +50,7 @@ function Login(props) {
             value={email || ''}
             onChange={handleChangeEmail}
             required
+            id="email"
           />
         </label>
 
@@ -57,12 +58,13 @@ function Login(props) {
           <input
             className="auth__form-input"
             type="password"
+            placeholder="••••••••••••••"
             name="password"
             minLength="6"
-            maxLength="16"
             value={password || ''}
             onChange={handleChangePassword}
             required
+            id="password"
           />
         </label>
 

@@ -41,8 +41,8 @@ function Header(props) {
                         pathname === "/" &&
                         <>
                             <nav className="header__container-authorized">
-                                <Link to="/movies" className="header__movies header__authorized_green">Фильмы</Link>
-                                <Link to="/saved-movies" className="header__saved-movies header__authorized_green">Сохранённые фильмы</Link>
+                                <Link to="/movies" className="header__movies header__movies_green">Фильмы</Link>
+                                <Link to="/saved-movies" className="header__saved-movies header__saved-movies_green">Сохранённые фильмы</Link>
                             </nav>
 
                             <Link className="header__account header__account_green" to="/profile">

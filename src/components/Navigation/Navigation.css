@@ -41,6 +41,16 @@
 
 .navigation__heading {
     color: #000;
+    text-decoration: none;
+}
+
+.navigation__heading:hover {
+   opacity: 0.7;
+}
+
+.navigation__heading_active {
+    border-bottom: 2px solid #000;
+    padding-bottom: 4px;
 }
 
 .navigation__button-close {
@@ -55,6 +65,11 @@
     position: absolute;
     top: 22.44px;
     right: 22.44px;
+    cursor: pointer;
+}
+
+.navigation__button-close:hover {
+    opacity: 0.8;
 }
 
 /* кнопка "аккаунт" */
@@ -76,6 +91,10 @@
     margin: 0;
     bottom: 90px;
     right: 210px;
+}
+
+.navigation__account:hover {
+    opacity: 0.7;
 }
 
 .navigation__account-text {
