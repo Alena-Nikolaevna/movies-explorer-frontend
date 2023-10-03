@@ -1,0 +1,135 @@
+.techs {
+    padding: 0 70px;
+    background: #F5F5F5;
+}
+
+.techs__title {
+    margin: 0 0 90px;
+    padding-top: 100px;
+    padding-bottom: 23px;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.88px;
+    border-bottom: 1px solid #000;
+}
+
+.techs__heading {
+    margin: 0;
+    text-align: center;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 58px;
+    letter-spacing: -2px;
+}
+
+.techs__text {
+    margin: 26px 0 100px;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.56px;
+}
+
+.techs__table {
+    margin: 0;
+    padding-bottom: 100px;
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.techs__table-cell {
+    width: 90px;
+    height: 60px;
+    border-radius: 10px;
+    background: #E8E8E8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+/* адаптивность 768px */
+
+@media screen and (max-width: 768px) {
+    .techs {
+        padding: 0 50px;
+    }
+
+    .techs__title {
+        margin: 0 0 80px;
+        padding-top: 90px;
+    }
+
+    .techs__text {
+        margin: 22px 0 83px;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: -0.48px;
+    }
+
+    .techs__table {
+        padding-bottom: 90px;
+    }
+
+    .techs__table-cell {
+        width: 84px;
+        height: 57px;
+        font-size: 12px;
+        letter-spacing: -0.48px;
+    }
+}
+
+/* адаптивность 570px */
+
+@media screen and (max-width: 570px) {
+    .techs {
+        padding: 0 18px;
+    }
+
+    .techs__title {
+        margin: 0 0 60px;
+        padding-top: 70px;
+        padding-bottom: 28px;
+        font-size: 18px;
+        letter-spacing: -0.72px;
+    }
+
+    .techs__heading {
+        font-size: 30px;
+        line-height: normal;
+        letter-spacing: -1.2px;
+    }
+
+    .techs__text {
+        margin: 24px 0 50px;
+        font-size: 11px;
+        line-height: 16px;
+        letter-spacing: -0.44px;
+    }
+
+    .techs__table {
+        padding-bottom: 70px;
+        display: grid;
+        grid-template-columns: minmax(84px, 57px) minmax(84px, 57px) minmax(84px, 57px);
+    }
+}
+
+/* адаптивность 400px */
+
+@media screen and (max-width: 400px) {
+    .techs__table {
+        grid-template-columns: minmax(84px, 57px) minmax(84px, 57px);
+    }
+}

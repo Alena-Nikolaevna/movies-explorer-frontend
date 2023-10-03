@@ -1,0 +1,39 @@
+.register {
+    max-width: 396px;
+    margin: 70px auto;
+}
+
+.register__header-logo {
+    width: 38px;
+    height: 38px;
+    margin: 0;
+    background-image: url(../../images/logo.svg);
+    background-repeat: no-repeat;
+}
+
+.register__header-logo:hover {
+    opacity: 0.8;
+}
+
+
+/* адаптивность 768px */
+
+@media screen and (max-width: 768px) {
+    .register {
+        margin: 232px auto;
+    }
+}
+
+/* адаптивность 570px */
+
+@media screen and (max-width: 570px) {
+    .register {
+        max-width: 260px;
+        margin: 56px auto 30px;
+    }
+
+    .register__logo {
+        display: flex;
+        justify-content: center;
+    }
+}
