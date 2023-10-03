@@ -1,0 +1,105 @@
+.moviesсard {
+    width: 270px;
+}
+
+.moviesсard__image {
+    width: 270px;
+    height: 151px;
+    object-fit: cover;
+    object-position: bottom right;
+    display: block;
+}
+
+.moviesсard__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.moviesсard__title {
+    max-width: 226px;
+    min-height: 32px;
+    margin: 14px 0 13px;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.moviesсard__btn {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    cursor: pointer;
+    background-position: center;
+    position: absolute;
+    top: 10px;
+    right: 0;
+}
+
+.moviesсard__btn:hover {
+    opacity: 0.8;
+}
+
+.moviesсard__btn_type_like-active {
+    background-image: url(../../../images/card-like-active.svg);
+}
+
+.moviesсard__btn_type_like-disable {
+    background-image: url(../../../images/card-like-no.svg);
+}
+
+.moviesсard__btn_type_delete {
+    background-image: url(../../../images/card-delete.svg);
+}
+
+.moviesсard__count-like {
+    margin: 0;
+    padding-top: 6px;
+    color: #A0A0A0;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border-top: 1px solid #E8E8E8;
+}
+
+/* адаптивность 768px */
+
+@media screen and (max-width: 768px) {
+    .moviesсard {
+        width: 339px;
+    }
+
+    .moviesсard__image {
+        width: 339px;
+        height: 190px;
+    }
+}
+
+/* адаптивность 570px */
+
+@media screen and (max-width: 450px) {
+    .moviesсard {
+        width: 300px;
+    }
+
+    .moviesсard__image {
+        width: 300px;
+        height: 168px;
+    }
+
+    .moviesсard__title {
+        margin-top: 15px;
+        font-size: 12px;
+    }
+
+    .moviesсard__count-like {
+        font-size: 10px;
+    }
+}

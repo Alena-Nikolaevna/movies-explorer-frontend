@@ -1,0 +1,238 @@
+.header {
+    width: 100%;
+    min-height: 74px;
+    margin: 0 auto;
+    display: flex;
+    box-sizing: border-box;
+    padding: 18px 70px;
+    justify-content: space-between;
+    position: relative;
+}
+
+.header_green {
+    background-color: #073042;
+}
+
+.header__logo {
+    width: 38px;
+    height: 38px;
+    margin: 0;
+    background-image: url(../../images/logo.svg);
+    background-repeat: no-repeat;
+}
+
+.header__logo:hover {
+    opacity: 0.8;
+}
+
+.header__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: normal;
+}
+
+.header__register {
+    margin: 0;
+    margin-right: 30px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.header__register:hover {
+    opacity: 0.8;
+}
+
+.header__login {
+    width: 76px;
+    height: 32px;
+    margin: 0;
+    color: #000;
+    text-decoration: none;
+    background-color: #2be080;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header__login:hover {
+    opacity: 0.8;
+}
+
+/* адаптивность 768px */
+
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 18px 30px;
+    }
+}
+
+/* адаптивность 460px */
+
+@media screen and (max-width: 460px) {
+    .header {
+        padding: 18px 14px;
+    }
+}
+
+/* адаптивность 320px */
+
+@media screen and (max-width: 320px) {
+    .header__container {
+        font-size: 10px;
+    }
+
+    .header__login {
+        width: 54px;
+        height: 26px;
+    }
+
+    .header__register {
+        margin-right: 14px;
+    }
+}
+
+/* авторизованный пользователь */
+
+.header__container-authorized {
+    display: flex;
+    align-items: center;
+}
+
+.header__movies {
+    color: #000;
+    text-align: center;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+    text-decoration: none;
+}
+
+.header__movies:hover {
+    opacity: 0.7;
+}
+
+.header__saved-movies {
+    margin-left: 16px;
+    color: #000;
+    text-align: center;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+    text-decoration: none;
+}
+
+.header__saved-movies:hover {
+    opacity: 0.7;
+}
+
+.header__account {
+    width: 100px;
+    height: 32px;
+    color: #000;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 12px;
+    text-decoration: none;
+    border-radius: 40px;
+    box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
+}
+
+.header__account:hover {
+    opacity: 0.7;
+}
+
+.header__account-text {
+    display: flex;
+    margin: 9.5px 0 9.5px 11px;
+    justify-content: center;
+}
+
+.header__account-icon {
+    width: 26px;
+    height: 26px;
+    margin-top: -7px;
+    margin-left: 7px;
+    background-image: url("../../images/icon-account.svg");
+    background-repeat: no-repeat;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: #f9f9f9;
+    background-position: center;
+}
+
+.header__button-open {
+    visibility: hidden;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    position: absolute;
+    background-image: url("../../images/nav-open-menu.svg");
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    top: 15px;
+    right: 30px;
+}
+
+.header__button-open:hover {
+    opacity: 0.8;
+}
+
+.header__movies_green {
+    color: #fff;
+}
+
+.header__saved-movies_green {
+    color: #fff;
+}
+
+.header__account_green {
+    background-color: #2BE080;
+}
+
+.header__button-open_white {
+    background-image: url("../../images/nav-open-menu-white.svg");
+}
+
+/* адаптивность 768px, бургер-меню */
+
+@media screen and (max-width: 768px) {
+
+    .header__container-authorized {
+        visibility: hidden;
+    }
+
+    .header__account {
+        visibility: hidden;
+    }
+
+    .header__account-text {
+        visibility: hidden;
+    }
+
+    .header__account-icon {
+        visibility: hidden;
+    }
+
+    .header__button-open {
+        visibility: visible;
+    }
+}
+
+/* адаптивность 460px, бургер-меню */
+
+@media screen and (max-width: 460px) {
+    .header__button-open {
+        width: 40px;
+        height: 43px;
+        right: 14px;
+    }
+}
