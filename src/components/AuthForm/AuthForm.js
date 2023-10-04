@@ -2,7 +2,7 @@ import React from "react";
 import "./AuthForm.css";
 import { Link } from "react-router-dom";
 
-function AuthForm(props) {
+function AuthForm({ isvalid, errors, ...props }) {
 
     return (
         <section className="auth">
@@ -14,7 +14,7 @@ function AuthForm(props) {
                     {props.children}
 
                 </form>
-                <button className={props.classNameBtn} type="submit">{props.button}</button>
+                <button className={`auth__button ${!isvalid && errors ? "auth__button_disabled" : ""}`} disabled={!isvalid} type="submit">{props.button}</button>
                 <p className="auth__link-text">{props.text}<Link to={props.links} className="auth__link">{props.link}</Link></p>
 
             </div>

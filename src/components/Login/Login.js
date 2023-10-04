@@ -3,24 +3,36 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import AuthForm from "../AuthForm/AuthForm";
 
-function Login(props) {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+import useFormValidation from "../../hook/UseFormValidation";
+import { useEffect } from "react";
+
+function Login({ ...props }) {
+  //const [email, setEmail] = React.useState("");
+  //const [password, setPassword] = React.useState("");
+
+  const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
+
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   function handleLoginSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
-    setEmail(!email);
-    setPassword(!password);
+    props.handleLogin({
+      email: values.email,
+      password: values.password,
+    })
   }
 
-  function handleChangeEmail(evt) {
-    setEmail(evt.target.value);
-  }
-
-  function handleChangePassword(evt) {
-    setPassword(evt.target.value);
-  }
+  /* function handleChangeEmail(evt) {
+     setEmail(evt.target.value);
+   }
+ 
+   function handleChangePassword(evt) {
+     setPassword(evt.target.value);
+   }*/
 
   return (
     <section className="login">
@@ -35,7 +47,6 @@ function Login(props) {
         title={"Рады видеть!"}
         handleSubmit={handleLoginSubmit}
         button={"Войти"}
-        classNameBtn={"auth__form-button-login auth__button"}
         text={"Ещё не зарегистрированы?"}
         link={"Регистрация"}
         links={"/signup"}
@@ -47,11 +58,13 @@ function Login(props) {
             type="email"
             placeholder="pochta@yandex.ru|"
             name="email"
-            value={email || ''}
-            onChange={handleChangeEmail}
+            value={values.email || ''}
+            onChange={handleChange}
             required
             id="email"
           />
+          <span className={`auth__form-error ${!isValid && errors.email ? "auth__form-error_active" : ""}`}>
+            {errors.email || ""}</span>
         </label>
 
         <label className="auth__form-label">Пароль
@@ -61,11 +74,13 @@ function Login(props) {
             placeholder="••••••••••••••"
             name="password"
             minLength="6"
-            value={password || ''}
-            onChange={handleChangePassword}
+            value={values.password || ''}
+            onChange={handleChange}
             required
             id="password"
           />
+          <span className={`auth__form-error ${!isValid && errors.password ? "auth__form-error_active" : ""}`}>
+            {errors.password || ""}</span>
         </label>
 
       </AuthForm>
