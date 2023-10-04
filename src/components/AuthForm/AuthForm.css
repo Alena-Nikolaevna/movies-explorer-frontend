@@ -76,10 +76,10 @@
     opacity: .8;
 }
 
-.auth__button_disabled {
-    opacity: 0.8;
+.auth__button:disabled{
+    opacity: 0.5;
     cursor: auto;
-}
+  }
 
 .auth__link-text {
     margin-top: 16px;

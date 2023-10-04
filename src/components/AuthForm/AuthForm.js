@@ -14,7 +14,7 @@ function AuthForm({ isvalid, errors, ...props }) {
                     {props.children}
 
                 </form>
-                <button className={`auth__button ${!isvalid && errors ? "auth__button_disabled" : ""}`} disabled={!isvalid} type="submit">{props.button}</button>
+                <button className="auth__button" disabled={!isvalid.errors} type="submit">{props.button}</button>
                 <p className="auth__link-text">{props.text}<Link to={props.links} className="auth__link">{props.link}</Link></p>
 
             </div>
