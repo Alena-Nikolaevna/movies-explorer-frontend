@@ -2,7 +2,7 @@ import React from "react";
 import "./AuthForm.css";
 import { Link } from "react-router-dom";
 
-function AuthForm({ isvalid, errors, ...props }) {
+function AuthForm({ isvalid, ...props }) {
 
     return (
         <section className="auth">

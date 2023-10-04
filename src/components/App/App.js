@@ -1,3 +1,9 @@
+/* eslint-disable max-len */
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/jsx-no-constructed-context-values */
+// eslint-disable-next-line 
+
 import React from 'react';
 
 import { useEffect, useState } from 'react';
@@ -20,7 +26,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import mainApi from '../../utils/MainApi';
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+// import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
 
@@ -28,7 +34,7 @@ function App() {
   const [userEmail, setUserEmail] = useState('');
 
   const navigate = useNavigate();
-  
+
 
   //Переменная состояния - отвечающая за полученные данные из API(имя, о себе, аватар = data)
   const [currentUser, setCurrentUser] = useState({});
@@ -74,13 +80,13 @@ function App() {
       .register(data)
       .then((res) => {
         localStorage.setItem('token', res.token);
-        setUserEmail(data.email);
+        // setUserEmail(data.email);
         setIsLoggedIn(true);
         navigate('/movies');
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
 
@@ -92,10 +98,11 @@ function App() {
       auth
         .checkToken(jwt)
         .then((res) => {
-          setUserEmail(res.email);
+          setCurrentUser(res)
           setIsLoggedIn(true);
-          navigate("/", { replace: true });
-        })
+          navigate("/movies", { replace: true });
+        }
+        )
         .catch((err) => console.log(err));
     }
   }
@@ -105,15 +112,15 @@ function App() {
   }, []);
 
 
-    //Обработчик сохранения данных пользователя -??
-    function handleUpdateUser(data) {
-      // Сохраняем данные пользователя
-      mainApi.patchUserInfo(data)
-        .then((res) => {
-          setCurrentUser(res)
-        })
-        .catch((err) => { console.log(err) });
-    }
+  //Обработчик сохранения данных пользователя -??
+  function handleUpdateUser(data) {
+    // Сохраняем данные пользователя
+    mainApi.patchUserInfo(data)
+      .then((res) => {
+        setCurrentUser(res)
+      })
+      .catch((err) => { console.log(err) });
+  }
 
 
   return (
