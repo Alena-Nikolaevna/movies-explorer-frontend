@@ -12,9 +12,9 @@ function AuthForm({ isvalid, ...props }) {
 
                 <form className="auth__form" name={props.name} onSubmit={props.handleSubmit}>
                     {props.children}
-
+                    <button className="auth__button" type="submit">{props.button}</button>
                 </form>
-                <button className="auth__button" disabled={!isvalid} type="submit">{props.button}</button>
+
                 <p className="auth__link-text">{props.text}<Link to={props.links} className="auth__link">{props.link}</Link></p>
 
             </div>
@@ -23,3 +23,5 @@ function AuthForm({ isvalid, ...props }) {
 }
 
 export default AuthForm;
+
+//disabled={!isvalid}

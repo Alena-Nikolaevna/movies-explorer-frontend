@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import Navigation from "../Navigation/Navigation";
 
-function Header({ isLoggedIn, ...props }) {
+function Header({ name, loggedIn, ...props }) {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -22,7 +22,7 @@ function Header({ isLoggedIn, ...props }) {
                 <div className="header__logo"></div>
             </Link>
 
-            {!isLoggedIn ? (
+            {!loggedIn ? (
                 <>
                     {
                         pathname === "/" &&

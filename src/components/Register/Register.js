@@ -27,18 +27,6 @@ function Register({ ...props }) {
     });
   }
 
-  /* function handleChangeName(evt) {
-     setName(evt.target.value);
-   }
- 
-   function handleChangeEmail(evt) {
-     setEmail(evt.target.value);
-   }
- 
-   function handleChangePassword(evt) {
-     setPassword(evt.target.value);
-   }*/
-
   return (
     <section className="register">
 
@@ -61,48 +49,51 @@ function Register({ ...props }) {
           <input
             className="auth__form-input"
             type="text"
-            placeholder="Виталий"
+            placeholder="Имя"
             name="name"
             minLength="2"
             maxLength="30"
-            value={values.name || ''}
+            value={values.name}
             onChange={handleChange}
             required
-            id="name"
+            autoComplete="off"
+           id="name"
           />
           <span className={`auth__form-error ${!isValid && errors.name ? "auth__form-error_active" : ""}`}>
-            {errors.name || ""}</span>
+            {errors.name}</span>
         </label>
 
         <label className="auth__form-label">Email
           <input
             className="auth__form-input"
             type="email"
-            placeholder="pochta@yandex.ru|"
+            placeholder="Email"
             name="email"
-            value={values.email || ''}
+            value={values.email}
             onChange={handleChange}
             required
+            autoComplete="off"
             id="email"
           />
           <span className={`auth__form-error ${!isValid && errors.email ? "auth__form-error_active" : ""}`}>
-            {errors.email || ""}</span>
+            {errors.email}</span>
         </label>
 
         <label className="auth__form-label">Пароль
           <input
             className="auth__form-input"
             type="password"
-            placeholder="••••••••••••••"
+            placeholder="Пароль"
             name="password"
             minLength="6"
-            value={values.password || ''}
+            value={values.password}
             onChange={handleChange}
             required
-            id="password"
+            autoComplete="off"
+           id="password"
           />
           <span className={`auth__form-error ${!isValid && errors.password ? "auth__form-error_active" : ""}`}>
-            {errors.password || ""}</span>
+            {errors.password}</span>
         </label>
 
       </AuthForm>

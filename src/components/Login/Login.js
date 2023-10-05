@@ -26,14 +26,6 @@ function Login({ ...props }) {
     })
   }
 
-  /* function handleChangeEmail(evt) {
-     setEmail(evt.target.value);
-   }
- 
-   function handleChangePassword(evt) {
-     setPassword(evt.target.value);
-   }*/
-
   return (
     <section className="login">
 

@@ -4,23 +4,48 @@ import Header from "../Header/Header";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-function Profile() {
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import useFormValidation from "../../hook/UseFormValidation";
+import { useEffect, useContext } from "react";
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
 
+function Profile(props) {
+
+  const currentUser = useContext(CurrentUserContext);
+  const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
   const [isRedact, setIsRedact] = useState(false);
 
-  function handleSubmitButton() {
+  useEffect(() => {
+    resetForm({
+      name: currentUser.name,
+      email: currentUser.email
+    });
+  }, [resetForm, currentUser, isRedact]);
+
+  /*const [name, setName] = useState("");
+  const [email, setEmail] = useState("");*/
+
+  /*React.useEffect(() => {
+    setValues({
+      name: currentUser.name,
+      email: currentUser.email,
+    });
+  }, [setValues, currentUser.name, currentUser.email]);*/
+
+
+
+
+  function handleSubmitButton(evt) {
+    evt.preventDefault();
+
+    props.handleUpdateUser({
+      name: values.name,
+      email: values.email,
+    });
+  }
+
+  function handleClick() {
     setIsRedact(!isRedact);
-  }
-
-  function handleChangeName(evt) {
-    setName(evt.target.value);
-  }
-
-  function handleChangeEmail(evt) {
-    setEmail(evt.target.value);
   }
 
   return (
@@ -29,8 +54,8 @@ function Profile() {
 
       <section className="profile">
 
-        <h2 className="profile__heading">Привет, Виталий!</h2>
-        <form className="profile__form">
+        <h2 className="profile__heading">Привет, {currentUser.name}!</h2>
+        <form className="profile__form" onClick={handleSubmitButton}>
 
           <label className="profile__form-label">Имя
             <input
@@ -41,10 +66,11 @@ function Profile() {
               name="name"
               minLength="2"
               maxLength="30"
-              value={name || ''}
-              onChange={handleChangeName}
+              value={values.name}
+              onChange={handleChange}
               required
               id="name"
+              isValid={isValid}
             />
           </label>
 
@@ -55,28 +81,32 @@ function Profile() {
               type="email"
               placeholder="pochta@yandex.ru|"
               name="email"
-              value={email || ''}
-              onChange={handleChangeEmail}
+              value={values.email}
+              onChange={handleChange}
               required
               id="email"
+              isValid={isValid}
             />
           </label>
 
+
+
+          {isRedact ? (
+            <div className="profile__save">
+              <span className="profile__error">При обновлении профиля произошла ошибка.</span>
+              <button className="profile__button-save" type="submit" onClick={handleClick}>Сохранить</button>
+            </div>
+          ) : (
+
+            <>
+              <div>
+                <button className="profile__button-redact" type="submit" onClick={handleClick}>Редактировать</button>
+              </div>
+              <p className="profile__link-text"><Link to="/" className="profile__link" onClick={props.handleLogout}>Выйти из аккаунта</Link></p>
+            </>
+          )}
+
         </form>
-
-        {isRedact ? (
-          <div className="profile__save">
-            <span className="profile__error">При обновлении профиля произошла ошибка.</span>
-            <button className="profile__button-save" type="submit" onClick={handleSubmitButton}>Сохранить</button>
-          </div>
-        ) : (
-
-          <div>
-            <button className="profile__button-redact" type="submit" onClick={handleSubmitButton}>Редактировать</button>
-            <p className="profile__link-text"><Link to="/" className="profile__link">Выйти из аккаунта</Link></p>
-          </div>
-
-        )}
       </section>
     </>
   );
