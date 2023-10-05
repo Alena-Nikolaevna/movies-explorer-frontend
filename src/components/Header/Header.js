@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import Navigation from "../Navigation/Navigation";
 
-function Header({ name, loggedIn, ...props }) {
+function Header({ loggedIn, ...props }) {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
