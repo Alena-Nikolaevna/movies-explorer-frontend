@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./MoviesCard.css";
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 
 function MoviesCard({ data, savedMovies, handleCardDelete, checkCardLiked }) {
@@ -33,19 +33,22 @@ function MoviesCard({ data, savedMovies, handleCardDelete, checkCardLiked }) {
 
     ////////////////////////
 
+    
     //////////////
 
     return (
 
+       // <a href={data.trailerLink} target='_blank' rel="noreferrer">
+
         <article className="moviesсard">
 
-            <Link to={data.trailerLink} target='_blank'>
+<a href={data.trailerLink} target='_blank' rel="noreferrer">
                 <img className="moviesсard__image"
              //   src={movie.image.url ? 'https://api.nomoreparties.co' + movie.image.url : movie.image}
              src={pathname === "/movies" ? `https://api.nomoreparties.co${data.image.url}` : data.image}
                     alt={data.nameRU}
                 />
-            </Link>
+            </a>
 
             <div className="moviesсard__container">
                 <h2 className="moviesсard__title">{data.nameRU}</h2>

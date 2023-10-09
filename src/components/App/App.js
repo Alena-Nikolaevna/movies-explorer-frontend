@@ -307,6 +307,7 @@ function App() {
 
     }
   }
+  
 
   
  /* function createNewMovie(data) {

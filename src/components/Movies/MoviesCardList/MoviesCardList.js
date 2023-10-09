@@ -9,58 +9,7 @@ function MoviesCardList({ movies, savedMovies, isLoading, serverError, handleCar
     const [ count, setCount ] = useState('');
     const fact = movies.slice(0, count);
 
-    const MaxScreen = 1280;
-    const MediumScreen = 1024;
-    const SmallScreen = 650;
-    const InitMoreMaxScreen = 16;
-    const InitLessMaxScreen = 12;
-    const InitMediumScreen = 8;
-    const InitSmallScreen = 5;
-    const StepMaxScreen = 4;
-    const StepMediumScreen = 3;
-    const StepSmallScreen = 2;
-
-    function printCards() {
-        const counter = { init: InitMoreMaxScreen, step: StepMaxScreen }
-        if (window.innerWidth < MaxScreen) {
-            counter.init = InitLessMaxScreen
-            counter.step = StepMediumScreen
-        }
-        if (window.innerWidth < MediumScreen) {
-            counter.init = InitMediumScreen
-            counter.step = StepSmallScreen
-        }
-        if (window.innerWidth < SmallScreen) {
-            counter.init = InitSmallScreen
-            counter.step = StepSmallScreen
-        }
-        return counter
-    }
-
-    useEffect(() => {
-        if (pathname === "/movies") {
-            setCount(printCards().init);
-
-            function printCardsForResize() {
-                if (window.innerWidth >= StepMaxScreen) {
-                    setCount(printCards().init)
-                }
-                if (window.innerWidth < StepMaxScreen) {
-                    setCount(printCards().init)
-                }
-                if (window.innerWidth < MediumScreen) {
-                    setCount(printCards().init)
-                }
-                if (window.innerWidth < SmallScreen) {
-                    setCount(printCards().init)
-                }
-            }
-            window.addEventListener("resize", printCardsForResize)
-            return () => window.removeEventListener("resize", printCardsForResize)
-        }
-    }, [pathname])
-
-
+   
     function clickMore() {
         setCount(count + printCards().step)
     }
