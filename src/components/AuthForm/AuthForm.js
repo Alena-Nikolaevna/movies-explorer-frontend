@@ -2,7 +2,7 @@ import React from "react";
 import "./AuthForm.css";
 import { Link } from "react-router-dom";
 
-function AuthForm({ isvalid, ...props }) {
+function AuthForm({ ...props }) {
 
     return (
         <section className="auth">
@@ -10,7 +10,7 @@ function AuthForm({ isvalid, ...props }) {
 
             <div className="auth__container">
 
-                <form className="auth__form" name={props.name} onSubmit={props.handleSubmit}>
+                <form className="auth__form" name={props.name} onSubmit={props.handleSubmit} isvalid={props.isvalid}>
                     {props.children}
                     <button className="auth__button" type="submit">{props.button}</button>
                 </form>

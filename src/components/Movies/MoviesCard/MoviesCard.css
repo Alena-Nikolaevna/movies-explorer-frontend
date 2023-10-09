@@ -40,6 +40,7 @@
     position: absolute;
     top: 10px;
     right: 0;
+   background-image: url(../../../images/card-like-no.svg);
 }
 
 .moviesсard__btn:hover {
@@ -50,9 +51,9 @@
     background-image: url(../../../images/card-like-active.svg);
 }
 
-.moviesсard__btn_type_like-disable {
+/*.moviesсard__btn_type_like-disable {
     background-image: url(../../../images/card-like-no.svg);
-}
+}*/
 
 .moviesсard__btn_type_delete {
     background-image: url(../../../images/card-delete.svg);

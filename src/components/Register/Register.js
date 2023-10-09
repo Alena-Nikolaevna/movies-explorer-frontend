@@ -43,6 +43,7 @@ function Register({ ...props }) {
         text={"Уже зарегистрированы?"}
         link={"Войти"}
         links={"/signin"}
+        isvalid={isValid}
       >
 
         <label className="auth__form-label">Имя

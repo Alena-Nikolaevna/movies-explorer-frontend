@@ -41,6 +41,15 @@ class MainApi {
         })
       }).then(this._checkResponse);
     }
+
+
+        /*createNewMovie(data) {
+      return fetch(`${this._address}/movies`, {
+        method: "POST",
+        headers: this._headers,
+        body: JSON.stringify(data)
+      }).then(this._checkResponse);
+    }*/
   
     // добавление новой карточки 
     // ???????????????
@@ -54,16 +63,18 @@ class MainApi {
             duration: data.duration,
             year: data.year,
             description: data.description,
-            image: data.image,
+           // image: data.image,
+           image: `https://api.nomoreparties.co${data.image.url}`,
             trailerLink: data.trailerLink,
             nameRU: data.nameRU,
             nameEN: data.nameEN,
-            thumbnail: data.thumbnail,
-            movieId: data.movieId,
+           // thumbnail: data.thumbnail,
+           thumbnail: 'https://api.nomoreparties.co' + data.image.formats.thumbnail.url,
+            movieId: data.id,
         })
       }).then(this._checkResponse);
     }
-  
+
     // удаление карточки
     deleteMovie(movieId) {
       return fetch(`${this._address}/movies/${movieId}`, {
@@ -71,6 +82,11 @@ class MainApi {
         headers: this._headers,
       }).then(this._checkResponse);
     }
+
+
+    ///////////////////////////////////////////////////////////////
+
+ 
   
   }
   

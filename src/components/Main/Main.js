@@ -10,10 +10,10 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 
 
-function Main() {
+function Main({ loggedIn }) {
   return (
     <>
-      <Header className="header header_green" />
+      <Header className="header header_green" loggedIn={loggedIn} />
 
       <main className="main">
         <Promo />
