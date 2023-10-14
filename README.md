@@ -1,5 +1,9 @@
 # Проект movies-explorer-frontend
 
+Ссылка на пулл реквест, открытый из ветки level-3 в main
+https://github.com/Alena-Nikolaevna/movies-explorer-frontend/pull/2
+
+
 Репозиторий для приложения проекта `movies-explorer-frontend`, включающий фронтенд приложения.
 
 Адрес репозитория:
