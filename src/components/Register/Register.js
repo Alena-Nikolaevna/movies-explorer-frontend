@@ -6,16 +6,13 @@ import AuthForm from "../AuthForm/AuthForm";
 import useFormValidation from "../../hook/UseFormValidation";
 import { useEffect } from "react";
 
-
 function Register({ ...props }) {
 
   const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
 
-
   useEffect(() => {
     resetForm();
   }, [resetForm]);
-
 
   function handleRegisterSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
@@ -40,10 +37,11 @@ function Register({ ...props }) {
         title={"Добро пожаловать!"}
         handleSubmit={handleRegisterSubmit}
         button={"Зарегистрироваться"}
+        classNameBtn={"auth__form-button-register auth__button"}
         text={"Уже зарегистрированы?"}
         link={"Войти"}
         links={"/signin"}
-        isvalid={isValid}
+        disabled={!isValid}
       >
 
         <label className="auth__form-label">Имя
@@ -54,11 +52,12 @@ function Register({ ...props }) {
             name="name"
             minLength="2"
             maxLength="30"
-            value={values.name}
+            value={values.name || ""}
             onChange={handleChange}
             required
             autoComplete="off"
-           id="name"
+            id="name"
+            pattern="^[A-Za-zА-Яа-яЁё\-\s]+$"
           />
           <span className={`auth__form-error ${!isValid && errors.name ? "auth__form-error_active" : ""}`}>
             {errors.name}</span>
@@ -70,11 +69,14 @@ function Register({ ...props }) {
             type="email"
             placeholder="Email"
             name="email"
-            value={values.email}
+            value={values.email || ""}
             onChange={handleChange}
             required
             autoComplete="off"
             id="email"
+            pattern='[a-z0-9_]+@[a-z]+.[a-z]{2,}'
+          //  pattern="[a-z0-9]+@[a-z0-9]+\.[a-z]"
+          //  pattern="/^[a-z0-9_-]+@[a-z0-9]+\.[a-z]$/i"
           />
           <span className={`auth__form-error ${!isValid && errors.email ? "auth__form-error_active" : ""}`}>
             {errors.email}</span>
@@ -87,16 +89,16 @@ function Register({ ...props }) {
             placeholder="Пароль"
             name="password"
             minLength="6"
-            value={values.password}
+            value={values.password || ""}
             onChange={handleChange}
             required
             autoComplete="off"
-           id="password"
+            id="password"
           />
           <span className={`auth__form-error ${!isValid && errors.password ? "auth__form-error_active" : ""}`}>
             {errors.password}</span>
         </label>
-
+        {props.isError && <span className="auth__form-error_active">{props.isErrorTextRegister}</span>}
       </AuthForm>
 
     </section>

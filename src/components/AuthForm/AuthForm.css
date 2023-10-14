@@ -42,8 +42,7 @@
 }
 
 .auth__form-error {
-    width: 260px;
-    height: 12px;
+    max-width: 396px; 
 }
 
 .auth__form-error_active {
@@ -58,7 +57,6 @@
 .auth__button {
     width: 396px;
     height: 45px;
-    margin-top: 221px;
     padding: 0;
     border: 0;
     background-color: #3456F3;
@@ -70,6 +68,14 @@
     font-weight: 500;
     line-height: normal;
     cursor: pointer;
+}
+
+.auth__form-button-login {
+    margin-top: 197px;
+}
+
+.auth__form-button-register {
+    margin-top: 128px;
 }
 
 .auth__button:hover {

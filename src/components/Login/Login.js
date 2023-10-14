@@ -7,8 +7,6 @@ import useFormValidation from "../../hook/UseFormValidation";
 import { useEffect } from "react";
 
 function Login({ ...props }) {
-  //const [email, setEmail] = React.useState("");
-  //const [password, setPassword] = React.useState("");
 
   const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
 
@@ -39,9 +37,11 @@ function Login({ ...props }) {
         title={"Рады видеть!"}
         handleSubmit={handleLoginSubmit}
         button={"Войти"}
+        classNameBtn={"auth__form-button-login auth__button"}
         text={"Ещё не зарегистрированы?"}
         link={"Регистрация"}
         links={"/signup"}
+        disabled={!isValid}
       >
 
         <label className="auth__form-label">Email
@@ -50,10 +50,12 @@ function Login({ ...props }) {
             type="email"
             placeholder="pochta@yandex.ru|"
             name="email"
-            value={values.email || ''}
+            value={values.email || ""}
             onChange={handleChange}
             required
             id="email"
+            autoComplete="off"
+            pattern='[a-z0-9_]+@[a-z]+.[a-z]{2,}'
           />
           <span className={`auth__form-error ${!isValid && errors.email ? "auth__form-error_active" : ""}`}>
             {errors.email || ""}</span>
@@ -66,14 +68,16 @@ function Login({ ...props }) {
             placeholder="••••••••••••••"
             name="password"
             minLength="6"
-            value={values.password || ''}
+            value={values.password || ""}
             onChange={handleChange}
             required
             id="password"
+            autoComplete="off"
           />
           <span className={`auth__form-error ${!isValid && errors.password ? "auth__form-error_active" : ""}`}>
             {errors.password || ""}</span>
         </label>
+        {props.isError && <span className="auth__form-error_active">{props.isErrorTextLogin}</span>}
 
       </AuthForm>
 
@@ -82,3 +86,4 @@ function Login({ ...props }) {
 }
 
 export default Login;
+

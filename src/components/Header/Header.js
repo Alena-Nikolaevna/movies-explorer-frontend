@@ -44,9 +44,9 @@ function Header({ loggedIn, ...props }) {
                             </nav>
 
                             <Link className="header__account header__account_green" to="/profile">
-                                <p className="header__account-text">Аккаунт
-                                    <div className="header__account-icon"></div>
-                                </p>
+                                <div className="header__account-text">Аккаунт
+                                    <p className="header__account-icon"></p>
+                                </div>
                             </Link>
 
                             <button className="header__button-open header__button-open_white" type="button" onClick={handleBurgerOpen} />
@@ -74,9 +74,9 @@ function Header({ loggedIn, ...props }) {
                             </nav>
 
                             <Link className="header__account" to="/profile">
-                                <p className="header__account-text">Аккаунт
-                                    <div className="header__account-icon"></div>
-                                </p>
+                                <div className="header__account-text">Аккаунт
+                                    <p className="header__account-icon"></p>
+                                </div>
                             </Link>
 
                             <button className="header__button-open" type="button" onClick={handleBurgerOpen} />

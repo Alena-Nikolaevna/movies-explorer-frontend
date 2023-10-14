@@ -4,10 +4,10 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 // eslint-disable-next-line 
 
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import './App.css';
 import Login from "../Login/Login";
@@ -41,75 +41,60 @@ function App() {
   //Переменная состояния для сохраненных фильмов(будем сюда класть массив сохраненных фильмов)
   const [savedMovies, setSavedMovies] = useState([]);
 
+  //const location = useLocation();
+  //const { pathname } = location;
   const navigate = useNavigate();
 
-  //Переменная состояния - отвечающая за полученные данные из API(имя, о себе, аватар = data)
-  // т.е. то, куда мы будем класть объект пользователя user
+  //Переменная состояния - отвечающая за полученные данные из API
   // значение по умолчанию - объект {}
   const [currentUser, setCurrentUser] = useState({});
 
-
-  //Переменная состояния, отвечает за отправку(чтобы прелоадер установить в момент запроса)
-  // меняется на true в момент отправки
-  // а потом в finally меняется на false(вне зависимости закончилась отправка с ошибкой или нет, 
-  // мы убираем setIsSend )
-  const [isSend, setIsSend] = useState(false);
-
-  //Переменная состояния для отображения ошибок
-  const [isError, setIsError] = useState(false);
-
   //Переменная состояния для проверки токена при каждом входе
-  const [isCheckToken, setIsCheckToken] = useState(true);
+  //const [isCheckToken, setIsCheckToken] = useState(true);
 
   //Переменная состояния для отображения успешности в профиле при сохранении редактирования
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isUpdateSuccessful, setIsUpdateSuccessful] = useState(false);
+
 
   //Переменная состояния используется в логике редактирования профиля
   // стейт отвечает за отрисовку кнопки редактировать/сохранить
   // у меня это стейт в профиле isRedact
   const [isEdit, setIsEdit] = useState(false);
 
+  //Переменная состояния для отображения ошибок
+  const [isError, setIsError] = useState(false);
+
+  //Переменные состояния для отображения текста ошибок
+  const [isErrorTextLogin, setIsErrorTextLogin] = useState("");
+  const [isErrorTextRegister, setIsErrorTextRegister] = useState("");
+  //const [isErrorTextUser, setIsErrorTextUser] = useState("");
+
+
+
+
+
+
+
+
   useEffect(() => {
-    // Получаем данные пользователя с сервера
+
     if (localStorage.token) {
       Promise.all([mainApi.getUserInfo(localStorage.token), mainApi.getInitialMovies(localStorage.token)])
-      .then(([userData, dataMovies]) => {
-        setCurrentUser(userData);
-        setSavedMovies(dataMovies);
-        setLoggedIn(true);
-      })
-      .catch((err) => { console.log(err) });
+        .then(([userInfo, initialMovies]) => {
+          setCurrentUser(userInfo);
+          setSavedMovies(initialMovies);
+          setLoggedIn(true);
+        })
+        .catch((err) => {
+          console.log(err);
+
+        });
 
     } else {
-      setLoggedIn(false)
+      setLoggedIn(false);
+
     }
   }, [loggedIn]);
-
-
-
-
-  /*useEffect(() => {
-     if (localStorage.token) {
-       Promise.all([mainApi.getUserInfo(localStorage.token), mainApi.getInitialMovies(localStorage.token)])
-         .then(([userData, dataMovies]) => {
-           setSavedMovies(dataMovies.reverse())
-           setCurrentUser(userData)
-           setLoggedIn(true)
-           setIsCheckToken(false)
-         })
-         .catch((err) => {
-           console.log(err)
-           setIsCheckToken(false)
-           localStorage.clear()
-         })
-     } else {
-       setLoggedIn(false)
-       setIsCheckToken(false)
-       localStorage.clear()
-     }
-   }, [loggedIn]);*/
-
-
 
 
   /*
@@ -130,15 +115,33 @@ function App() {
     })
     .catch((e) => console.log(e))
 }*/
-
-
-
   ///////////////////////////////
+
+  /** обработчик регистрации пользователя */
+  function handleRegister({ name, email, password }) {
+    auth.register({ name, email, password })
+      .then((res) => {
+        if (res) {
+          setLoggedIn(false)
+          handleLogin({ email, password })
+        }
+      })
+
+      .catch((err) => {
+        setIsError(true);
+        if (err === 409) {
+          setIsErrorTextRegister("Пользователь с таким email уже существует.");
+        };
+
+        if (err === 500) {
+          setIsErrorTextRegister("На сервере произошла ошибка.");
+        };
+        console.log(`Ошибка регистрации ${err}`);
+      });
+  }
 
   /** обработчик авторизации пользователя */
   function handleLogin(data) {
-    // setIsSend(true)
-    // return
     auth.login(data)
       .then((res) => {
         localStorage.setItem('token', res.token);
@@ -146,64 +149,44 @@ function App() {
         navigate('/movies', { replace: true });
       })
       .catch((err) => {
+        setIsError(true);
+        setIsErrorTextLogin("Вы ввели неправильный логин или пароль.")
         console.log(err);
       });
   }
 
-  /** обработчик регистрации пользователя */
-  function handleRegister({ name, email, password }) {
-    // setIsSend(true)
-    //return auth
-    auth.register({ name, email, password })
-      .then((res) => {
-        if (res) {
-          setLoggedIn(false)
-          auth.login({ email, password })
-            .then((res) => {
-              localStorage.setItem('token', res.token);
-              setLoggedIn(true);
-              navigate('/movies', { replace: true });
-            })
-            .catch((err) => {
-              //  setIsError(true)
-              console.log(`Ошибка авторизации ${err}`);
-            })
-          //  .finally(() => setIsSend(false))
-        }
-      })
-      .catch((err) => {
-        //  setIsError(true)
-        console.log(`Ошибка регистрвции ${err}`);
-      })
-    // .finally(() => setIsSend(false))
-  }
-
   // удаление токена при выходе из аккаунта
   function handleLogout() {
-    localStorage.removeItem('token');
+    localStorage.clear();
     setLoggedIn(false);
     navigate('/');
   }
 
-  //Обработчик сохранения данных пользователя
-  function handleUpdateUser(data) {
-    // Сохраняем данные пользователя
-  //  setIsSend(true)
-    mainApi.patchUserInfo(data, localStorage.token)
-      .then((res) => {
-        setCurrentUser(res)
-        // setIsSuccess(true)
-      })
-      .catch((err) => { console.log(err) })
-     // .finally(() => setIsSend(false))
+
+
+  
+  function successful() {
+    
+    setTimeout(() => {
+      setIsUpdateSuccessful(false);
+    }, 1200);
   }
 
-  useEffect(() => {
-    handleCheckToken();
-  }, []);
+  //Обработчик сохранения данных пользователя
+  function handleUpdateUser(data) {
+    mainApi.patchUserInfo(data, localStorage.token)
+      .then((res) => {
+        setCurrentUser(res);
+        setIsUpdateSuccessful(true)
+      })
+      .catch((err) => {
+        // setIsError(true)
+        //  setIsErrorTextUser("Вы ввели неверные данные.")
+        console.log(`Ошибка при обновлении профиля ${err}`)
+      })
+  }
 
-
-  // обработчик проверки пользователя, есть ли токен в localStorage
+  // проверка пользователя, есть ли токен в localStorage
   function handleCheckToken() {
 
     const jwt = localStorage.getItem("token");
@@ -214,36 +197,18 @@ function App() {
           if (res) {
             setCurrentUser(res)
             setLoggedIn(true);
-            navigate("/movies", { replace: true });
+            navigate("/", { replace: true });
           }
         })
         .catch((err) => console.log(err));
     }
   }
 
+  useEffect(() => {
+    handleCheckToken();
+  }, []);
 
-
-
-  //////////////////////////////////////////////
-
-
-  /*function handleCardLike(movie) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = movie.likes.some(id => id === currentUser.id);
-  }
-  
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    function changeLikeCardStatus(movie.id, !isLiked) {
-      .then((newMovie) => {
-        setMovies((state) => state.map((c) => c.id === movie.id ? newMovie : c));
-      })
-      .catch((err) => { console.log(err) });
-  }
-  
-  
-  
-  
-  function handleCardLike(card) {
+  /*function handleCardLike(card) {
     if (checkCardLiked(card) === false) {
         likeAndSaveFilm(card);
     } else {
@@ -263,8 +228,6 @@ function App() {
     return isLiked;
   }
   
-  
-  
   //Обработчик удаления своей карточки
   function handleCardDelete(movie) {
     mainApi.deleteCard(movie.id)
@@ -275,67 +238,35 @@ function App() {
       .catch((err) => { console.log(err) });
   }*/
 
-
   //Обработчик удаления своей карточки
-  function handleCardDelete(moviedelId) {
-    mainApi.deleteMovie(moviedelId, localStorage.token)
+  function handleCardDelete(film) {
+    mainApi.deleteMovie(film, localStorage.token)
       .then(() => {
-        setSavedMovies(savedMovies.filter((movie) => { return movie._id !== moviedelId }));
+        setSavedMovies(savedMovies.filter((movie) => { return movie._id !== film }));
       })
       .catch((err) => { console.log(`Ошибка при удалении фильма ${err}`) });
   }
 
   /////////////////////////////////////////////
 
+  function checkCardLiked(movie) {
+    const isLikeMovie = savedMovies.some(element => movie.id === element.movieId);
 
-  function checkCardLiked(data) {
-    const isLikeMovie = savedMovies.some(element => data.id === element.movieId);
-  //  console.log(isLikeMovie);
-    const seachClickMovie = savedMovies.filter((movie) => {
-      return movie.movieId === data.id
+    const clickFilm = savedMovies.filter((film) => {
+      return film.movieId === movie.id
     })
-   // console.log(seachClickMovie);
+
     if (isLikeMovie) {
-      handleCardDelete(seachClickMovie[0]._id)
+      handleCardDelete(clickFilm[0]._id)
     } else {
-      mainApi.createNewMovie(data, localStorage.token)
+      mainApi.createNewMovie(movie, localStorage.token)
         .then(res => {
           setSavedMovies([res, ...savedMovies])
         })
-    
-        .catch((err) => { console.log(`Ошибка при установке лайка ${err}`) });
 
+        .catch((err) => { console.log(`Ошибка при установке лайка ${err}`) });
     }
   }
-  
-
-  
- /* function createNewMovie(data) {
-    mainApi
-      .createNewMovie({
-        country: data.country,
-        director: data.director,
-        duration: data.duration,
-        year: data.year,
-        description: data.description,
-        image: 'https://api.nomoreparties.co' + data.image.url,
-        trailerLink: data.trailerLink,
-        nameRU: data.nameRU,
-        nameEN: data.nameEN,
-        // thumbnail: data.thumbnail,
-        thumbnail: 'https://api.nomoreparties.co' + data.image.formats.thumbnail.url,
-        movieId: data.id,
-      })
-      .then((res) => {
-        setSavedMovies([res.movie, ...savedMovies]);
-        localStorage.setItem('savedMovies', JSON.stringify([res.movie, ...savedMovies]));
-      })
-      .catch((err) => console.log(err));
-  }*/
-
-  //////////////////////////////////
-
-  
 
   return (
 
@@ -343,9 +274,6 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
 
       <div className="page">
-
-
-
 
         <Routes>
 
@@ -355,13 +283,8 @@ function App() {
             <ProtectedRoute
               element={Movies}
               loggedIn={loggedIn}
-
-             // setSavedMovies={setSavedMovies}
               savedMovies={savedMovies}
-
               checkCardLiked={checkCardLiked}
-
-
             />}
           />
 
@@ -369,10 +292,8 @@ function App() {
             <ProtectedRoute
               element={SavedMovies}
               loggedIn={loggedIn}
-          
               savedMovies={savedMovies}
               handleCardDelete={handleCardDelete}
-
             />}
           />
 
@@ -380,15 +301,20 @@ function App() {
             <ProtectedRoute
               element={Profile}
               loggedIn={loggedIn}
-              handleUpdateUser={handleUpdateUser}
-
-
               handleLogout={handleLogout}
+
+              handleUpdateUser={handleUpdateUser}
+              isUpdateSuccessful={isUpdateSuccessful}
+              successful={successful}
+
+
+
+
             />}
           />
 
-          <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
-          <Route path="/signup" element={<Register handleRegister={handleRegister} />} />
+          <Route path="/signin" element={<Login handleLogin={handleLogin} isError={isError} isErrorTextLogin={isErrorTextLogin} />} />
+          <Route path="/signup" element={<Register handleRegister={handleRegister} isError={isError} isErrorTextRegister={isErrorTextRegister} />} />
 
           <Route path="*" element={<PageNotFound />} />
 

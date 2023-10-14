@@ -10,9 +10,9 @@ function AuthForm({ ...props }) {
 
             <div className="auth__container">
 
-                <form className="auth__form" name={props.name} onSubmit={props.handleSubmit} isvalid={props.isvalid}>
+                <form className="auth__form" name={props.name} onSubmit={props.handleSubmit} noValidate>
                     {props.children}
-                    <button className="auth__button" type="submit">{props.button}</button>
+                    <button disabled={props.disabled} className={props.classNameBtn} type="submit">{props.button}</button>
                 </form>
 
                 <p className="auth__link-text">{props.text}<Link to={props.links} className="auth__link">{props.link}</Link></p>
@@ -24,4 +24,4 @@ function AuthForm({ ...props }) {
 
 export default AuthForm;
 
-//disabled={!isvalid}
+

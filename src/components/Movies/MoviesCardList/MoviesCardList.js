@@ -4,14 +4,40 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import { useLocation } from "react-router-dom";
 import Preloader from "../Preloader/Preloader";
 
-function MoviesCardList({ movies, savedMovies, isLoading, serverError, handleCardDelete, checkCardLiked }) {
-    const { pathname } = useLocation();
-    const [ count, setCount ] = useState('');
-    const fact = movies.slice(0, count);
+import { Max_Width_Screen, Center_Width_Screen, Mobile_Width_Screen } from "../../../utils/constants";
+import displayMovies from "../../../utils/displayMovies.js";
 
-   
-    function clickMore() {
-        setCount(count + printCards().step)
+function MoviesCardList({ filterListFilms, savedMovies, isLoading, serverError, handleCardDelete, checkCardLiked, searchInput }) {
+    const { pathname } = useLocation();
+    const [isNumber, setIsNumber] = useState('');
+    const movies = filterListFilms.slice(0, isNumber);
+
+    useEffect(() => {
+        if (pathname === "/movies") {
+            setIsNumber(displayMovies().cards);
+
+            function resizeDisplayMovies() {
+                if (window.innerWidth >= Max_Width_Screen) {
+                    setIsNumber(displayMovies().cards)
+                }
+                if (window.innerWidth < Max_Width_Screen) {
+                    setIsNumber(displayMovies().cards)
+                }
+                if (window.innerWidth < Center_Width_Screen) {
+                    setIsNumber(displayMovies().cards)
+                }
+                if (window.innerWidth < Mobile_Width_Screen) {
+                    setIsNumber(displayMovies().cards)
+                }
+            }
+            window.addEventListener("resize", resizeDisplayMovies);
+            return () => window.removeEventListener("resize", resizeDisplayMovies);
+        }
+    }, [pathname])
+
+
+    function handleAddButtonClick() {
+        setIsNumber(isNumber + displayMovies().add);
     }
 
     return (
@@ -21,46 +47,45 @@ function MoviesCardList({ movies, savedMovies, isLoading, serverError, handleCar
             <ul className="moviescardlist__cards">
 
                 {isLoading ? <Preloader /> :
-                    (pathname === "/movies" && fact.length !== 0) ?
 
-                        fact.map(data => {
+
+                    (pathname === "/movies" && movies.length !== 0) ?
+
+                        movies.map((movie) => {
                             return (
                                 <MoviesCard
-                                    key={data.id}
-                                    
-                                    data={data}
+                                    key={movie.id}
+                                    movie={movie}
                                     savedMovies={savedMovies}
                                     checkCardLiked={checkCardLiked}
-                               
-                    
-                                  
                                 />
                             )
-                        }) : movies.length !== 0 ?
-                            movies.map((data) => {
+                        }) : filterListFilms.length !== 0 ?
+                        filterListFilms.map((movie) => {
                                 return (
                                     <MoviesCard
-                                        key={data._id}
-
-                                      //  createNewMovie={createNewMovie}
-                                        data={data}
+                                        key={movie._id}
+                                        movie={movie}
                                         handleCardDelete={handleCardDelete}
-                                      
                                     />
                                 )
-                            }) : serverError 
-                            
-                            ?
-                                <span className='error-film'>Во время запроса произошла ошибка</span>
-                                : pathname === "/movies" ?
-                                    <span className='error-film'>Чтобы увидеть фильмы, выполните поиск</span>
-                                    :
-                                    <span className='error-film'>Нет сохраненных фильмов</span>
+                            }) : serverError ?
+
+                                <span className="moviescardlist__error">«Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз»</span>
+                                : (pathname === "/movies" && searchInput.length === 0) ?
+                                    <span className="moviescardlist__error">«Для получения списка фильмов выполните поиск»</span>
+
+
+                                    : pathname === "/movies" ?
+                                        <span className='moviescardlist__error'>«Ничего не найдено.<br></br>
+                                            Для получения списка фильмов выполните верный поиск»</span>
+                                        :
+                                        <span className='moviescardlist__error'>«Нет сохраненных фильмов»</span>
                 }
             </ul>
 
             <div className="moviescardlist__btn-container">
-                {pathname === "/movies" && <button className={`moviescardlist__btn ${count >= movies.length && "moviescardlist__btn_hidden"}`} onClick={clickMore} type="button">Ещё</button>}
+                {pathname === "/movies" && <button className={`moviescardlist__btn ${isNumber >= filterListFilms.length && "moviescardlist__btn_hidden"}`} onClick={handleAddButtonClick} type="button">Ещё</button>}
             </div>
         </section>
     );

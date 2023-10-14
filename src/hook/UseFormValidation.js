@@ -16,6 +16,32 @@ function useFormValidation() {
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest("form").checkValidity());
+
+    if (name === 'name') {
+      if (!target.checkValidity()) {
+        setErrors({ ...errors, [name]: 'Поле "Имя" должно содержать только латиницу, кириллицу, пробел и дефис. Количество символов: минимум 2' });
+      } else {
+        setErrors({ ...errors, [name]: '' });
+      }
+    }
+
+    if (name === 'password') {
+      if (!target.checkValidity()) {
+        setErrors({ ...errors, [name]: 'Минимальная длина символов для пароля: 6' });
+      } else {
+        setErrors({ ...errors, [name]: '' });
+      }
+    }
+
+
+    if (name === 'search') {
+      if (value === null || value === '') {
+        setErrors({ ...errors, [name]: 'Нужно ввести ключевое слово' });
+    } else {
+      setErrors({ ...errors, [name]: '' });
+    }
+  }
+
   };
 
   const resetForm = useCallback(

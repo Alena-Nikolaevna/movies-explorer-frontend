@@ -9,7 +9,7 @@ import useFormValidation from "../../hook/UseFormValidation";
 import { useEffect, useContext } from "react";
 
 
-function Profile(props) {
+function Profile({ handleUpdateUser, isUpdateSuccessful, handleLogout, successful }) {
 
   const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
@@ -22,26 +22,13 @@ function Profile(props) {
     });
   }, [resetForm, currentUser, isRedact]);
 
-  /*const [name, setName] = useState("");
-  const [email, setEmail] = useState("");*/
-
-  /*React.useEffect(() => {
-    setValues({
-      name: currentUser.name,
-      email: currentUser.email,
-    });
-  }, [setValues, currentUser.name, currentUser.email]);*/
-
-
-
 
   function handleSubmitButton(evt) {
     evt.preventDefault();
-
-    props.handleUpdateUser({
+    handleUpdateUser({
       name: values.name,
       email: values.email,
-    });
+    })
   }
 
   function handleClick() {
@@ -55,24 +42,28 @@ function Profile(props) {
       <section className="profile">
 
         <h2 className="profile__heading">Привет, {currentUser.name}!</h2>
-        <form className="profile__form" onClick={handleSubmitButton}>
+        <form className="profile__form" onClick={handleSubmitButton} noValidate>
 
           <label className="profile__form-label">Имя
             <input
               disabled={!isRedact}
+
               className="profile__form-input"
               type="text"
               placeholder="Виталий"
               name="name"
               minLength="2"
               maxLength="30"
-              value={values.name}
+              value={values.name || ""}
               onChange={handleChange}
               required
               id="name"
-              isValid={isValid}
+             // isValid={isValid}
+              pattern="^[A-Za-zА-Яа-яЁё\-\s]+$"
             />
           </label>
+          <span className={`profile__error ${!isValid && errors.name ? "profile__error_active" : ""}`}>
+            {errors.name}</span>
 
           <label className="profile__form-label">Email
             <input
@@ -81,28 +72,34 @@ function Profile(props) {
               type="email"
               placeholder="pochta@yandex.ru|"
               name="email"
-              value={values.email}
+              value={values.email || ""}
               onChange={handleChange}
               required
               id="email"
-              isValid={isValid}
+              //  error={errors.email}
+              // isValid={isValid}
+              pattern='[a-z0-9_]+@[a-z]+.[a-z]{2,}'
             />
+
           </label>
-
-
+          <span className={`profile__error ${!isValid && errors.email ? "profile__error_active" : ""}`}>
+            {errors.email}</span>
 
           {isRedact ? (
+
+
             <div className="profile__save">
-              <span className="profile__error">При обновлении профиля произошла ошибка.</span>
-              <button className="profile__button-save" type="submit" onClick={handleClick}>Сохранить</button>
+
+              <button className="profile__button-save" type="submit" onClick={handleClick} disabled={!isValid}>Сохранить</button>
+
             </div>
           ) : (
-
             <>
+              {isUpdateSuccessful && <span className='profile__successful'> {successful()} Данные успешно сохранены</span>}
               <div>
                 <button className="profile__button-redact" type="submit" onClick={handleClick}>Редактировать</button>
               </div>
-              <p className="profile__link-text"><Link to="/" className="profile__link" onClick={props.handleLogout}>Выйти из аккаунта</Link></p>
+              <p className="profile__link-text"><Link to="/" className="profile__link" onClick={handleLogout}>Выйти из аккаунта</Link></p>
             </>
           )}
 

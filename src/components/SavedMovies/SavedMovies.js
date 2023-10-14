@@ -7,67 +7,60 @@ import Header from "../Header/Header";
 import { useState, useCallback } from "react";
 import { useEffect } from "react";
 
-//import savedMoviesCards from "../../utils/SavedMoviesCards";
-
 function SavedMovies({ savedMovies, handleCardDelete }) {
 
-// длдя отрисовки фильмоы фильтры
-const [filteredMovies, setFilteredMovies] = useState(savedMovies);
-
- // для строки поиска из инпута и записфывваапть в локал сторедж
- const [searchedMovie, setSearchedMovie] = useState("");
+  // для строки поиска из инпута и записывать в локал сторедж
+  const [searchInput, setSearchInput] = useState('');
 
   //за состояние переключения короткометражек
-  const [isCheck, setIsCheck] = useState(false);
+  const [statusShort, setStatusShort] = useState(false);
 
+  // длдя отрисовки фильмов фильтры
+  const [filterListFilms, setFilterListFilms] = useState([]);
 
-  const filter = useCallback((search, isCheck, movies) => {
-    setSearchedMovie(search)
-    setFilteredMovies(movies.filter((movie) => {
-      const searchName = movie.nameRU.toLowerCase().includes(search.toLowerCase())
-      return isCheck ? (searchName && movie.duration <=40) : searchName
-    }))
-     }, [])
-    
+  const filterFilms = useCallback((search, statusShort, movies) => {
+    setSearchInput(search);
+    setFilterListFilms(movies.filter((movie) => {
+      const searchText = movie.nameRU.toLowerCase().includes(search.toLowerCase());
+      return statusShort ? (searchText && movie.duration <= 40) : searchText
+    }));
+  }, []);
 
-     function handleMovies(search) {
-      filter(search, isCheck, savedMovies)
-     }
+  function handleMovies(search) {
+    filterFilms(search, statusShort, savedMovies);
+  };
 
-     useEffect(() => {
-      filter(searchedMovie, isCheck, savedMovies)
-     }, [filter, savedMovies, isCheck, searchedMovie])
+  function toggleSwitchShort() {
+    if (statusShort) {
+      setStatusShort(false);
+      filterFilms(searchInput, false, savedMovies);
+    } else {
+      setStatusShort(true);
+      filterFilms(searchInput, true, savedMovies);
+    };
+  };
 
-     function changeShort() {
-      if (isCheck) {
-        setIsCheck(false)
-        filter(searchedMovie, false, savedMovies)
-      } else {
-        setIsCheck(true)
-        filter(searchedMovie, true, savedMovies)
-      }
-    }
+  useEffect(() => {
+    filterFilms(searchInput, statusShort, savedMovies);
+  }, [filterFilms, savedMovies, statusShort, searchInput]);
 
   return (
     <>
       <Header className="header" />
 
       <main className="savedmovies">
-        <SearchForm 
-        handleMovies={handleMovies}
-
-       // searchMovies={searchMovies}
-        searchedMovie={searchedMovie}
-        changeShort={changeShort}
-        savedMovies={savedMovies}
-        isCheck={isCheck}
+        <SearchForm
+          handleMovies={handleMovies}
+          toggleSwitchShort={toggleSwitchShort}
+          savedMovies={savedMovies}
+          statusShort={statusShort}
+          searchInput={searchInput}
         />
-        
-        <MoviesCardList 
-   
-       // savedMovies={savedMovies}
-       movies={filteredMovies}
-       handleCardDelete={handleCardDelete}
+
+        <MoviesCardList
+          // savedMovies={savedMovies}
+          filterListFilms={filterListFilms}
+          handleCardDelete={handleCardDelete}
         />
       </main>
 
