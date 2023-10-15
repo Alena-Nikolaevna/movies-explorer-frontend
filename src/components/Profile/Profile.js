@@ -44,10 +44,9 @@ function Profile({ handleUpdateUser, isUpdateSuccessful, handleLogout, successfu
         <h2 className="profile__heading">Привет, {currentUser.name}!</h2>
         <form className="profile__form" onClick={handleSubmitButton} noValidate>
 
-          <label className="profile__form-label">Имя
+          <label className="profile__form-label profile__form-label_bottom_active">Имя
             <input
               disabled={!isRedact}
-
               className="profile__form-input"
               type="text"
               placeholder="Виталий"
@@ -58,12 +57,14 @@ function Profile({ handleUpdateUser, isUpdateSuccessful, handleLogout, successfu
               onChange={handleChange}
               required
               id="name"
-             // isValid={isValid}
+              //isValid={isValid}
               pattern="^[A-Za-zА-Яа-яЁё\-\s]+$"
             />
+
           </label>
           <span className={`profile__error ${!isValid && errors.name ? "profile__error_active" : ""}`}>
             {errors.name}</span>
+
 
           <label className="profile__form-label">Email
             <input

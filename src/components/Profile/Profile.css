@@ -16,11 +16,10 @@
 .profile__form {
     display: flex;
     flex-direction: column;
-    gap: 17px;
+    /*gap: 17px;*/
 }
 
 .profile__form-label {
-    padding-bottom: 16px;
     display: flex;
     justify-content: space-between;
     color: #000;
@@ -28,11 +27,12 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    border-bottom: 1px solid #E8E8E8;
 }
 
-.profile__form-label:last-child {
-    border-bottom: none;
+.profile__form-label_bottom_active {
+    border-bottom: 1px solid #E8E8E8;
+    margin-bottom: 17px;
+    padding-bottom: 16px;
 }
 
 .profile__form-input {
