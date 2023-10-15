@@ -4,7 +4,7 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 // eslint-disable-next-line 
 
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
@@ -19,9 +19,7 @@ import Register from "../Register/Register";
 import SavedMovies from "../SavedMovies/SavedMovies";
 
 //import Preloader from "../Movies/Preloader/Preloader";
-
 //import Header from '../Header/Header';
-
 
 import { Routes, Route } from "react-router-dom";
 
@@ -41,25 +39,18 @@ function App() {
   //Переменная состояния для сохраненных фильмов(будем сюда класть массив сохраненных фильмов)
   const [savedMovies, setSavedMovies] = useState([]);
 
-  //const location = useLocation();
-  //const { pathname } = location;
   const navigate = useNavigate();
 
   //Переменная состояния - отвечающая за полученные данные из API
   // значение по умолчанию - объект {}
   const [currentUser, setCurrentUser] = useState({});
 
-  //Переменная состояния для проверки токена при каждом входе
-  //const [isCheckToken, setIsCheckToken] = useState(true);
-
   //Переменная состояния для отображения успешности в профиле при сохранении редактирования
   const [isUpdateSuccessful, setIsUpdateSuccessful] = useState(false);
-
 
   //Переменная состояния используется в логике редактирования профиля
   // стейт отвечает за отрисовку кнопки редактировать/сохранить
   // у меня это стейт в профиле isRedact
-  const [isEdit, setIsEdit] = useState(false);
 
   //Переменная состояния для отображения ошибок
   const [isError, setIsError] = useState(false);
@@ -68,13 +59,6 @@ function App() {
   const [isErrorTextLogin, setIsErrorTextLogin] = useState("");
   const [isErrorTextRegister, setIsErrorTextRegister] = useState("");
   //const [isErrorTextUser, setIsErrorTextUser] = useState("");
-
-
-
-
-
-
-
 
   useEffect(() => {
 
@@ -87,15 +71,12 @@ function App() {
         })
         .catch((err) => {
           console.log(err);
-
         });
 
     } else {
       setLoggedIn(false);
-
     }
   }, [loggedIn]);
-
 
   /*
   function handleMovies() {
@@ -162,11 +143,7 @@ function App() {
     navigate('/');
   }
 
-
-
-  
   function successful() {
-    
     setTimeout(() => {
       setIsUpdateSuccessful(false);
     }, 1200);
@@ -306,10 +283,6 @@ function App() {
               handleUpdateUser={handleUpdateUser}
               isUpdateSuccessful={isUpdateSuccessful}
               successful={successful}
-
-
-
-
             />}
           />
 

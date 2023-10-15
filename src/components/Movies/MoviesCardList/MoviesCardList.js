@@ -56,8 +56,8 @@ function MoviesCardList({ filterListFilms, savedMovies, isLoading, serverError, 
                                 <MoviesCard
                                     key={movie.id}
                                     movie={movie}
-                                    savedMovies={savedMovies}
                                     checkCardLiked={checkCardLiked}
+                                    savedMovies={savedMovies}
                                 />
                             )
                         }) : filterListFilms.length !== 0 ?
