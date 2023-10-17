@@ -49,9 +49,9 @@ function SearchForm({ handleMovies, toggleSwitchShort, searchInput, savedMovies,
                     <button className={`searchform__submit-btn ${savedMovies ? (pathname === "/saved-movies" && savedMovies.length === 0) : ''}`} type="submit">Найти</button>
                 </div>
 
-                <div className="searchform__checkbox-container" onClick={toggleSwitchShort}>
+                <div className="searchform__checkbox-container">
                     <label className="searchform__label">
-                        <input className="searchform__checkbox-item" type="checkbox" id="checkbox" name="checkbox" checked={statusShort}></input>
+                        <input className="searchform__checkbox-item" onChange={toggleSwitchShort} type="checkbox" id="checkbox" name="checkbox" checked={statusShort}></input>
                         <span className="searchform__label-text">Короткометражки</span>
                     </label>
                 </div>
