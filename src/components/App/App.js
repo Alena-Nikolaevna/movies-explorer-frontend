@@ -78,24 +78,6 @@ function App() {
     }
   }, [loggedIn]);
 
-  /*
-  function handleMovies() {
-    // Получаем фильмы
-    moviesApi.getMoviesApi()
-      .then((res) => {
-        setLoggedIn(true);
-        localStorage.setItem('movies', JSON.stringify(res));
-        setMovies(JSON.parse(localStorage.getItem('movies')) || []);
-      })
-      .catch((err) => { console.log(err) });*/
-  /*moviesApi.getMoviesApi()
-    .then((res) => {
-     setLoggedIn(true);
-       localStorage.setItem('movies', res.movies);
-      setMovies((res) || []);
-    })
-    .catch((e) => console.log(e))
-}*/
   ///////////////////////////////
 
   /** обработчик регистрации пользователя */
@@ -174,7 +156,7 @@ function App() {
           if (res) {
             setCurrentUser(res)
             setLoggedIn(true);
-            navigate("/", { replace: true });
+           // navigate("/", { replace: true });
           }
         })
         .catch((err) => console.log(err));
@@ -184,36 +166,6 @@ function App() {
   useEffect(() => {
     handleCheckToken();
   }, []);
-
-  /*function handleCardLike(card) {
-    if (checkCardLiked(card) === false) {
-        likeAndSaveFilm(card);
-    } else {
-        removeFilm(card)
-    }
-  }
-  
-  function checkCardLiked(card) {
-    const isLiked = savedCards.some((film) => {
-        if (film.movieId === card.movieId) {
-            return true ;
-        }
-        else {
-            return false;
-        }
-    })
-    return isLiked;
-  }
-  
-  //Обработчик удаления своей карточки
-  function handleCardDelete(movie) {
-    mainApi.deleteCard(movie.id)
-      .then(() => {
-        setMovies(movies => movies.filter((c) => c.id !== movie.id));
-        // closeAllPopups();
-      })
-      .catch((err) => { console.log(err) });
-  }*/
 
   //Обработчик удаления своей карточки
   function handleCardDelete(film) {
