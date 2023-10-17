@@ -51,7 +51,7 @@ function SearchForm({ handleMovies, toggleSwitchShort, searchInput, savedMovies,
 
                 <div className="searchform__checkbox-container" onClick={toggleSwitchShort}>
                     <label className="searchform__label">
-                        <input className="searchform__checkbox-item" type="checkbox" id="checkbox" name="checkbox"></input>
+                        <input className="searchform__checkbox-item" type="checkbox" id="checkbox" name="checkbox" checked={statusShort}></input>
                         <span className="searchform__label-text">Короткометражки</span>
                     </label>
                 </div>

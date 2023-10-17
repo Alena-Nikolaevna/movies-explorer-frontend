@@ -97,8 +97,7 @@ function Movies({ savedMovies, checkCardLiked }) {
           handleMovies={handleMovies}
           toggleSwitchShort={toggleSwitchShort}
           searchInput={searchInput}
-        // isCheck={isCheck}
-        // savedMovies={savedMovies}
+          statusShort={statusShort}
         />
 
         <MoviesCardList
