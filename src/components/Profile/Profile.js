@@ -15,13 +15,14 @@ function Profile({ handleUpdateUser, isUpdateSuccessful, handleLogout, successfu
   const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
   const [isRedact, setIsRedact] = useState(false);
 
+  const buttonValidation = isValid && (values.name !== currentUser.name || values.email !== currentUser.email);
+
   useEffect(() => {
     resetForm({
       name: currentUser.name,
       email: currentUser.email
     });
   }, [resetForm, currentUser, isRedact]);
-
 
   function handleSubmitButton(evt) {
     evt.preventDefault();
@@ -79,7 +80,7 @@ function Profile({ handleUpdateUser, isUpdateSuccessful, handleLogout, successfu
               id="email"
               //  error={errors.email}
               // isValid={isValid}
-              pattern='[a-z0-9_]+@[a-z]+.[a-z]{2,}'
+              pattern='[a-z0-9_]+@[a-z]+\.[a-z]{2,}$'
             />
 
           </label>
@@ -91,7 +92,7 @@ function Profile({ handleUpdateUser, isUpdateSuccessful, handleLogout, successfu
 
             <div className="profile__save">
 
-              <button className="profile__button-save" type="submit" onClick={handleClick} disabled={!isValid}>Сохранить</button>
+              <button className="profile__button-save" type="submit" onClick={handleClick} disabled={!buttonValidation}>Сохранить</button>
 
             </div>
           ) : (

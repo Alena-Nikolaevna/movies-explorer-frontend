@@ -55,7 +55,7 @@ function Login({ ...props }) {
             required
             id="email"
             autoComplete="off"
-            pattern='[a-z0-9_]+@[a-z]+.[a-z]{2,}'
+            pattern='[a-z0-9_]+@[a-z]+\.[a-z]{2,}$'
           />
           <span className={`auth__form-error ${!isValid && errors.email ? "auth__form-error_active" : ""}`}>
             {errors.email || ""}</span>
