@@ -33,7 +33,7 @@ function MoviesCardList({ filterListFilms, savedMovies, isLoading, serverError, 
             window.addEventListener("resize", resizeDisplayMovies);
             return () => window.removeEventListener("resize", resizeDisplayMovies);
         }
-    }, [pathname])
+    }, [pathname, filterListFilms])
 
 
     function handleAddButtonClick() {
