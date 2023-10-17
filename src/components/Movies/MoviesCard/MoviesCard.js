@@ -3,6 +3,8 @@ import "./MoviesCard.css";
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
+import durationFilm from "../../../utils/durationFilm.js";
+
 function MoviesCard({ movie, savedMovies, handleCardDelete, checkCardLiked }) {
 
     const { pathname } = useLocation();
@@ -26,12 +28,6 @@ function MoviesCard({ movie, savedMovies, handleCardDelete, checkCardLiked }) {
             setIsLiked(false)
             checkCardLiked(movie)
         }
-    }
-
-    function durationFilm(time) {
-        const hours = Math.floor(time / 60);
-        const minutes = time % 60;
-        return (hours === 0 ? `${minutes}м` : `${hours}ч ${minutes}м`);
     }
 
     return (
