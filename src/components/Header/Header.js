@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import Navigation from "../Navigation/Navigation";
+import { NavLink } from "react-router-dom";
 
 function Header({ loggedIn, ...props }) {
 
@@ -69,8 +70,8 @@ function Header({ loggedIn, ...props }) {
                     (
                         <>
                             <nav className="header__container-authorized">
-                                <Link to="/movies" className="header__movies">Фильмы</Link>
-                                <Link to="/saved-movies" className="header__saved-movies">Сохранённые фильмы</Link>
+                                <NavLink to="/movies" className={({ isActive }) => `header__movies ${isActive ? 'header__movies_active' : ""}`}>Фильмы</NavLink>
+                                <NavLink to="/saved-movies" className={({ isActive }) => `header__saved-movies ${isActive ? 'header__saved-movies_active' : ""}`}>Сохранённые фильмы</NavLink>
                             </nav>
 
                             <Link className="header__account" to="/profile">
