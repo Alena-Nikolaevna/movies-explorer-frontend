@@ -7,7 +7,8 @@
 import React from 'react';
 
 import { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 import './App.css';
 import Login from "../Login/Login";
@@ -18,17 +19,12 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import SavedMovies from "../SavedMovies/SavedMovies";
 
-//import Preloader from "../Movies/Preloader/Preloader";
-//import Header from '../Header/Header';
-
 import { Routes, Route } from "react-router-dom";
 
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 import * as auth from "../../utils/Auth";
-//import * as moviesApi from "../../utils/MoviesApi";
-//import moviesApi from "../../utils/MoviesApi";
 import mainApi from '../../utils/MainApi';
 
 function App() {
@@ -60,6 +56,13 @@ function App() {
   const [isErrorTextRegister, setIsErrorTextRegister] = useState("");
   //const [isErrorTextUser, setIsErrorTextUser] = useState("");
 
+  const location = useLocation();
+  const path = location.pathname;
+
+  useEffect(() => {
+    handleCheckToken();
+  }, []);
+
   useEffect(() => {
 
     if (localStorage.token) {
@@ -79,6 +82,26 @@ function App() {
   }, [loggedIn]);
 
   ///////////////////////////////
+
+    // проверка пользователя, есть ли токен в localStorage
+    function handleCheckToken() {
+
+      const jwt = localStorage.getItem("token");
+      if (jwt) {
+        auth
+          .checkToken(jwt)
+          .then((res) => {
+            if (res) {
+              setCurrentUser(res)
+              setLoggedIn(true);
+             // navigate("/", { replace: true });
+             navigate(path, { replace: true });
+            }
+          })
+          .catch((err) => console.log(err));
+          setLoggedIn(false);
+      }
+    }
 
   /** обработчик регистрации пользователя */
   function handleRegister({ name, email, password }) {
@@ -145,28 +168,6 @@ function App() {
       })
   }
 
-  // проверка пользователя, есть ли токен в localStorage
-  function handleCheckToken() {
-
-    const jwt = localStorage.getItem("token");
-    if (jwt) {
-      auth
-        .checkToken(jwt)
-        .then((res) => {
-          if (res) {
-            setCurrentUser(res)
-            setLoggedIn(true);
-           // navigate("/", { replace: true });
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-  }
-
-  useEffect(() => {
-    handleCheckToken();
-  }, []);
-
   //Обработчик удаления своей карточки
   function handleCardDelete(film) {
     mainApi.deleteMovie(film, localStorage.token)
@@ -206,10 +207,11 @@ function App() {
 
         <Routes>
 
-          <Route path="/" element={<Main loggedIn={loggedIn} />} />
+          <Route path="/" element={<Main loggedIn={loggedIn} path="/" />} />
 
           <Route path="/movies" element={
             <ProtectedRoute
+            path="/movies"
               element={Movies}
               loggedIn={loggedIn}
               savedMovies={savedMovies}
@@ -219,6 +221,7 @@ function App() {
 
           <Route path="/saved-movies" element={
             <ProtectedRoute
+            path="/saved-movies"
               element={SavedMovies}
               loggedIn={loggedIn}
               savedMovies={savedMovies}
@@ -228,6 +231,7 @@ function App() {
 
           <Route path="/profile" element={
             <ProtectedRoute
+            path="/profile"
               element={Profile}
               loggedIn={loggedIn}
               handleLogout={handleLogout}
@@ -238,8 +242,8 @@ function App() {
             />}
           />
 
-          <Route path="/signin" element={<Login handleLogin={handleLogin} isError={isError} isErrorTextLogin={isErrorTextLogin} />} />
-          <Route path="/signup" element={<Register handleRegister={handleRegister} isError={isError} isErrorTextRegister={isErrorTextRegister} />} />
+          <Route path="/signin" element={ loggedIn ? ( <Navigate to="/movies" replace loggedIn={loggedIn} /> ) : ( <Login handleLogin={handleLogin} isError={isError} isErrorTextLogin={isErrorTextLogin} />)} />
+          <Route path="/signup" element={ loggedIn ? ( <Navigate to="/movies" replace loggedIn={loggedIn} /> ) : ( <Register handleRegister={handleRegister} isError={isError} isErrorTextRegister={isErrorTextRegister} />)} />
 
           <Route path="*" element={<PageNotFound />} />
 
