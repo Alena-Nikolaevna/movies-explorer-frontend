@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 function PageNotFound() {
 
-    const navigate = useNavigate();
-    const buttonLink = () => navigate(-1);
+    const navigateButton = useNavigate();
+    const buttonLink = () => navigateButton(-1);
 
     return (
         <section className="notfound">
