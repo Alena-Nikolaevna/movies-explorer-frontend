@@ -16,6 +16,7 @@
 .profile__form {
     display: flex;
     flex-direction: column;
+    position: relative;
     /*gap: 17px;*/
 }
 
@@ -86,12 +87,12 @@
 
 /* код для кнопки "сохранить" */
 
-.profile__save {
-    position: relative;
-}
+/*.profile__save {
+    
+}*/
 
 .profile__error {
-   max-width: 410px;
+    max-width: 410px;
 }
 
 .profile__error_active {
@@ -110,7 +111,7 @@
     line-height: 13px;
     text-align: center;
     color: #2be080;
-    bottom: 165px;
+    bottom: 65px;
 }
 
 .profile__button-save {
@@ -193,6 +194,10 @@
     }
 
     .profile__error {
+        width: 260px;
+    }
+
+    .profile__successful {
         width: 260px;
     }
 }
