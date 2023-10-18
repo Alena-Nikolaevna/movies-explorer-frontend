@@ -31,10 +31,24 @@
     font-weight: 500;
     line-height: normal;
     cursor: pointer;
+    visibility: visible;
 }
 
 .moviescardlist__btn:hover {
     opacity: 0.8;
+}
+
+.moviescardlist__btn_hidden {
+    visibility: hidden;
+}
+
+.moviescardlist__error {
+    text-align: center;
+    margin: 0 auto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
 
 /* адаптивность 768px */

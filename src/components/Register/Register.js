@@ -3,32 +3,25 @@ import "./Register.css";
 import { Link } from "react-router-dom";
 import AuthForm from "../AuthForm/AuthForm";
 
-function Register() {
+import useFormValidation from "../../hook/UseFormValidation";
+import { useEffect } from "react";
 
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+function Register({ ...props }) {
 
-  // const [isValue, setIsValue] = useState(false);
+  const { values, handleChange, errors, isValid, resetForm } = useFormValidation();
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   function handleRegisterSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
-    setName(!name);
-    setEmail(!email);
-    setPassword(!password);
-  }
-
-  function handleChangeName(evt) {
-    setName(evt.target.value);
-  }
-
-  function handleChangeEmail(evt) {
-    setEmail(evt.target.value);
-  }
-
-  function handleChangePassword(evt) {
-    setPassword(evt.target.value);
+    props.handleRegister({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    });
   }
 
   return (
@@ -48,51 +41,63 @@ function Register() {
         text={"Уже зарегистрированы?"}
         link={"Войти"}
         links={"/signin"}
+        disabled={!isValid}
       >
 
         <label className="auth__form-label">Имя
           <input
             className="auth__form-input"
             type="text"
-            placeholder="Виталий"
+            placeholder="Имя"
             name="name"
             minLength="2"
             maxLength="30"
-            value={name || ''}
-            onChange={handleChangeName}
+            value={values.name || ""}
+            onChange={handleChange}
             required
+            autoComplete="off"
             id="name"
+            pattern="^[A-Za-zА-Яа-яЁё\-\s]+$"
           />
+          <span className={`auth__form-error ${!isValid && errors.name ? "auth__form-error_active" : ""}`}>
+            {errors.name}</span>
         </label>
 
         <label className="auth__form-label">Email
           <input
             className="auth__form-input"
             type="email"
-            placeholder="pochta@yandex.ru|"
+            placeholder="Email"
             name="email"
-            value={email || ''}
-            onChange={handleChangeEmail}
+            value={values.email || ""}
+            onChange={handleChange}
             required
+            autoComplete="off"
             id="email"
+            pattern='[a-z0-9_]+@[a-z]+\.[a-z]{2,}$'
+          //  pattern='[a-z0-9_]+@[a-z]+.[a-z]{2,}'
           />
+          <span className={`auth__form-error ${!isValid && errors.email ? "auth__form-error_active" : ""}`}>
+            {errors.email}</span>
         </label>
 
         <label className="auth__form-label">Пароль
           <input
             className="auth__form-input"
             type="password"
-            placeholder="••••••••••••••"
+            placeholder="Пароль"
             name="password"
             minLength="6"
-            value={password || ''}
-            onChange={handleChangePassword}
+            value={values.password || ""}
+            onChange={handleChange}
             required
+            autoComplete="off"
             id="password"
           />
-          <span className="auth__form-error">Что-то пошло не так...</span>
+          <span className={`auth__form-error ${!isValid && errors.password ? "auth__form-error_active" : ""}`}>
+            {errors.password}</span>
         </label>
-
+        {props.isError && <span className="auth__form-error_active">{props.isErrorTextRegister}</span>}
       </AuthForm>
 
     </section>

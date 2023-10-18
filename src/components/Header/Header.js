@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import Navigation from "../Navigation/Navigation";
+import { NavLink } from "react-router-dom";
 
-function Header(props) {
-
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+function Header({ loggedIn, ...props }) {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -24,7 +23,7 @@ function Header(props) {
                 <div className="header__logo"></div>
             </Link>
 
-            {!isLoggedIn ? (
+            {!loggedIn ? (
                 <>
                     {
                         pathname === "/" &&
@@ -46,9 +45,9 @@ function Header(props) {
                             </nav>
 
                             <Link className="header__account header__account_green" to="/profile">
-                                <p className="header__account-text">Аккаунт
-                                    <div className="header__account-icon"></div>
-                                </p>
+                                <div className="header__account-text">Аккаунт
+                                    <p className="header__account-icon"></p>
+                                </div>
                             </Link>
 
                             <button className="header__button-open header__button-open_white" type="button" onClick={handleBurgerOpen} />
@@ -71,14 +70,14 @@ function Header(props) {
                     (
                         <>
                             <nav className="header__container-authorized">
-                                <Link to="/movies" className="header__movies">Фильмы</Link>
-                                <Link to="/saved-movies" className="header__saved-movies">Сохранённые фильмы</Link>
+                                <NavLink to="/movies" className={({ isActive }) => `header__movies ${isActive ? 'header__movies_active' : ""}`}>Фильмы</NavLink>
+                                <NavLink to="/saved-movies" className={({ isActive }) => `header__saved-movies ${isActive ? 'header__saved-movies_active' : ""}`}>Сохранённые фильмы</NavLink>
                             </nav>
 
                             <Link className="header__account" to="/profile">
-                                <p className="header__account-text">Аккаунт
-                                    <div className="header__account-icon"></div>
-                                </p>
+                                <div className="header__account-text">Аккаунт
+                                    <p className="header__account-icon"></p>
+                                </div>
                             </Link>
 
                             <button className="header__button-open" type="button" onClick={handleBurgerOpen} />

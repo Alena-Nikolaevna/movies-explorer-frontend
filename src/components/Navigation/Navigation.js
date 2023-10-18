@@ -26,9 +26,9 @@ function Navigation() {
                         </div>
 
                         <Link className="navigation__account" to="/profile">
-                            <p className="navigation__account-text">Аккаунт
-                                <div className="navigation__account-icon"></div>
-                            </p>
+                            <div className="navigation__account-text">Аккаунт
+                                <p className="navigation__account-icon"></p>
+                            </div>
                         </Link>
 
                         <button className="navigation__button-close" type="button" onClick={handleBurgerClose} />

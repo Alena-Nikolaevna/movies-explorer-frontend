@@ -1,4 +1,15 @@
+/* eslint-disable max-len */
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/jsx-no-constructed-context-values */
+// eslint-disable-next-line 
+
 import React from 'react';
+
+import { useEffect, useState } from 'react';
+import { Navigate, useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+
 import './App.css';
 import Login from "../Login/Login";
 import Main from "../Main/Main";
@@ -10,25 +21,237 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 
 import { Routes, Route } from "react-router-dom";
 
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+
+import * as auth from "../../utils/Auth";
+import mainApi from '../../utils/MainApi';
+
 function App() {
+
+  ////Переменная состояния, которая отвечает за то, что пользователь залогинился(после логина меняется на true)
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  //Переменная состояния для сохраненных фильмов(будем сюда класть массив сохраненных фильмов)
+  const [savedMovies, setSavedMovies] = useState([]);
+
+  const navigate = useNavigate();
+
+  //Переменная состояния - отвечающая за полученные данные из API
+  // значение по умолчанию - объект {}
+  const [currentUser, setCurrentUser] = useState({});
+
+  //Переменная состояния для отображения успешности в профиле при сохранении редактирования
+  const [isUpdateSuccessful, setIsUpdateSuccessful] = useState(false);
+
+  //Переменная состояния используется в логике редактирования профиля
+  // стейт отвечает за отрисовку кнопки редактировать/сохранить
+  // у меня это стейт в профиле isRedact
+
+  //Переменная состояния для отображения ошибок
+  const [isError, setIsError] = useState(false);
+
+  //Переменные состояния для отображения текста ошибок
+  const [isErrorTextLogin, setIsErrorTextLogin] = useState("");
+  const [isErrorTextRegister, setIsErrorTextRegister] = useState("");
+  //const [isErrorTextUser, setIsErrorTextUser] = useState("");
+
+  const location = useLocation();
+  const path = location.pathname;
+
+  useEffect(() => {
+    handleCheckToken();
+  }, []);
+
+  useEffect(() => {
+
+    if (localStorage.token) {
+      Promise.all([mainApi.getUserInfo(localStorage.token), mainApi.getInitialMovies(localStorage.token)])
+        .then(([userInfo, initialMovies]) => {
+          setCurrentUser(userInfo);
+          setSavedMovies(initialMovies);
+          setLoggedIn(true);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+    } else {
+      setLoggedIn(false);
+    }
+  }, [loggedIn]);
+
+  ///////////////////////////////
+
+    // проверка пользователя, есть ли токен в localStorage
+    function handleCheckToken() {
+
+      const jwt = localStorage.getItem("token");
+      if (jwt) {
+        auth
+          .checkToken(jwt)
+          .then((res) => {
+            if (res) {
+              setCurrentUser(res)
+              setLoggedIn(true);
+             // navigate("/", { replace: true });
+             navigate(path, { replace: true });
+            }
+          })
+          .catch((err) => console.log(err));
+          setLoggedIn(false);
+      }
+    }
+
+  /** обработчик регистрации пользователя */
+  function handleRegister({ name, email, password }) {
+    auth.register({ name, email, password })
+      .then((res) => {
+        if (res) {
+          setLoggedIn(false)
+          handleLogin({ email, password })
+        }
+      })
+
+      .catch((err) => {
+        setIsError(true);
+        if (err === 409) {
+          setIsErrorTextRegister("Пользователь с таким email уже существует.");
+        };
+
+        if (err === 500) {
+          setIsErrorTextRegister("На сервере произошла ошибка.");
+        };
+        console.log(`Ошибка регистрации ${err}`);
+      });
+  }
+
+  /** обработчик авторизации пользователя */
+  function handleLogin(data) {
+    auth.login(data)
+      .then((res) => {
+        localStorage.setItem('token', res.token);
+        setLoggedIn(true);
+        navigate('/movies', { replace: true });
+      })
+      .catch((err) => {
+        setIsError(true);
+        setIsErrorTextLogin("Вы ввели неправильный логин или пароль.")
+        console.log(err);
+      });
+  }
+
+  // удаление токена при выходе из аккаунта
+  function handleLogout() {
+    localStorage.clear();
+    setLoggedIn(false);
+    navigate('/');
+  }
+
+  function successful() {
+    setTimeout(() => {
+      setIsUpdateSuccessful(false);
+    }, 1200);
+  }
+
+  //Обработчик сохранения данных пользователя
+  function handleUpdateUser(data) {
+    mainApi.patchUserInfo(data, localStorage.token)
+      .then((res) => {
+        setCurrentUser(res);
+        setIsUpdateSuccessful(true)
+      })
+      .catch((err) => {
+        // setIsError(true)
+        //  setIsErrorTextUser("Вы ввели неверные данные.")
+        console.log(`Ошибка при обновлении профиля ${err}`)
+      })
+  }
+
+  //Обработчик удаления своей карточки
+  function handleCardDelete(film) {
+    mainApi.deleteMovie(film, localStorage.token)
+      .then(() => {
+        setSavedMovies(savedMovies.filter((movie) => { return movie._id !== film }));
+      })
+      .catch((err) => { console.log(`Ошибка при удалении фильма ${err}`) });
+  }
+
+  /////////////////////////////////////////////
+
+  function checkCardLiked(movie) {
+    const isLikeMovie = savedMovies.some(element => movie.id === element.movieId);
+
+    const clickFilm = savedMovies.filter((film) => {
+      return film.movieId === movie.id
+    })
+
+    if (isLikeMovie) {
+      handleCardDelete(clickFilm[0]._id)
+    } else {
+      mainApi.createNewMovie(movie, localStorage.token)
+        .then(res => {
+          setSavedMovies([res, ...savedMovies])
+        })
+
+        .catch((err) => { console.log(`Ошибка при установке лайка ${err}`) });
+    }
+  }
 
   return (
 
-    <div className="page">
+    //«Внедряем» данные из currentUser с помощью провайдера контекста
+    <CurrentUserContext.Provider value={currentUser}>
 
-      <Routes>
+      <div className="page">
 
-        <Route path="/" element={<Main />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/saved-movies" element={<SavedMovies />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/signin" element={<Login />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="*" element={<PageNotFound />} />
+        <Routes>
 
-      </Routes>
+          <Route path="/" element={<Main loggedIn={loggedIn} path="/" />} />
 
-    </div>
+          <Route path="/movies" element={
+            <ProtectedRoute
+            path="/movies"
+              element={Movies}
+              loggedIn={loggedIn}
+              savedMovies={savedMovies}
+              checkCardLiked={checkCardLiked}
+            />}
+          />
+
+          <Route path="/saved-movies" element={
+            <ProtectedRoute
+            path="/saved-movies"
+              element={SavedMovies}
+              loggedIn={loggedIn}
+              savedMovies={savedMovies}
+              handleCardDelete={handleCardDelete}
+            />}
+          />
+
+          <Route path="/profile" element={
+            <ProtectedRoute
+            path="/profile"
+              element={Profile}
+              loggedIn={loggedIn}
+              handleLogout={handleLogout}
+
+              handleUpdateUser={handleUpdateUser}
+              isUpdateSuccessful={isUpdateSuccessful}
+              successful={successful}
+            />}
+          />
+
+          <Route path="/signin" element={ loggedIn ? ( <Navigate to="/movies" replace loggedIn={loggedIn} /> ) : ( <Login handleLogin={handleLogin} isError={isError} isErrorTextLogin={isErrorTextLogin} />)} />
+          <Route path="/signup" element={ loggedIn ? ( <Navigate to="/movies" replace loggedIn={loggedIn} /> ) : ( <Register handleRegister={handleRegister} isError={isError} isErrorTextRegister={isErrorTextRegister} />)} />
+
+          <Route path="*" element={<PageNotFound />} />
+
+        </Routes>
+
+      </div>
+
+    </CurrentUserContext.Provider >
   );
 }
 
